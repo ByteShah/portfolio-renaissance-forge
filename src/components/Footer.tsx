@@ -12,26 +12,53 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-navy py-8 border-t border-navy-lightest">
-      <div className="container flex flex-col items-center">
-        <div className="flex space-x-6 mb-6">
-          {socialLinks.map((link, index) => (
-            <a
-              key={index}
-              href={link.href}
-              aria-label={link.label}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate hover:text-mint transform hover:-translate-y-1 transition-all duration-200"
-            >
-              <link.icon size={20} />
-            </a>
-          ))}
+    <footer className="bg-navy py-10 border-t border-navy-lightest">
+      <div className="container mx-auto px-6">
+        <div className="flex flex-col md:flex-row justify-between items-center">
+          <div className="mb-6 md:mb-0">
+            <div className="text-mint text-3xl font-serif mb-2">JS</div>
+            <p className="text-slate-light">Senior Odoo Developer & AI Specialist</p>
+          </div>
+          
+          <div className="grid grid-cols-2 gap-x-16 gap-y-3 mb-8 md:mb-0">
+            <div>
+              <h3 className="text-slate-lightest font-medium mb-3">Explore</h3>
+              <ul className="space-y-2">
+                <li><a href="#about" className="text-slate hover:text-mint transition-colors">About</a></li>
+                <li><a href="#skills" className="text-slate hover:text-mint transition-colors">Skills</a></li>
+                <li><a href="#projects" className="text-slate hover:text-mint transition-colors">Projects</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-slate-lightest font-medium mb-3">Connect</h3>
+              <ul className="space-y-2">
+                <li><a href="#experience" className="text-slate hover:text-mint transition-colors">Experience</a></li>
+                <li><a href="#contact" className="text-slate hover:text-mint transition-colors">Contact</a></li>
+                <li><a href="/resume.pdf" className="text-slate hover:text-mint transition-colors">Resume</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
         
-        <div className="text-sm text-slate">
-          <p>Designed & Built by Jaimin Shah</p>
-          <p className="mt-1">© {year} All Rights Reserved</p>
+        <div className="border-t border-navy-lightest mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <div className="text-sm text-slate mb-4 md:mb-0">
+            <p>© {year} Jaimin Shah. All Rights Reserved</p>
+          </div>
+          
+          <div className="flex space-x-6">
+            {socialLinks.map((link, index) => (
+              <a
+                key={index}
+                href={link.href}
+                aria-label={link.label}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate hover:text-mint transform hover:-translate-y-1 transition-all duration-200"
+              >
+                <link.icon size={20} />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </footer>
