@@ -8,6 +8,7 @@ import Skills from "@/components/sections/Skills";
 import Projects from "@/components/sections/Projects";
 import Experience from "@/components/sections/Experience";
 import Contact from "@/components/sections/Contact";
+import { cn } from "@/lib/utils";
 
 const Index = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -33,7 +34,7 @@ const Index = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className={cn("flex flex-col min-h-screen", isDarkMode ? "dark-theme" : "light-theme")}>
       <Navbar toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
       
       <main className="flex-1">

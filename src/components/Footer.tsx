@@ -5,10 +5,10 @@ const Footer = () => {
   const year = new Date().getFullYear();
   
   const socialLinks = [
-    { icon: Github, href: "https://github.com/johndoe", label: "GitHub" },
-    { icon: Linkedin, href: "https://linkedin.com/in/johndoe", label: "LinkedIn" },
-    { icon: Twitter, href: "https://twitter.com/johndoe", label: "Twitter" },
-    { icon: Mail, href: "mailto:john@example.com", label: "Email" },
+    { icon: Github, href: "https://github.com/jaiminshah", label: "GitHub" },
+    { icon: Linkedin, href: "https://linkedin.com/in/jaiminshah", label: "LinkedIn" },
+    { icon: Twitter, href: "https://twitter.com/jaiminshah", label: "Twitter" },
+    { icon: Mail, href: "mailto:s1.jaimin@gmail.com", label: "Email" },
   ];
 
   return (
@@ -30,7 +30,7 @@ const Footer = () => {
         </div>
         
         <div className="text-sm text-slate">
-          <p>Designed & Built by John Doe</p>
+          <p>Designed & Built by Jaimin Shah</p>
           <p className="mt-1">© {year} All Rights Reserved</p>
         </div>
       </div>

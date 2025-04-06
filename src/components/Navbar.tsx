@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Menu, X, Moon, Sun } from "lucide-react";
+import { Menu, X, Moon, Sun, BookOpen, Award, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -39,11 +39,11 @@ const Navbar = ({ toggleTheme, isDarkMode }: NavbarProps) => {
   }, [isMenuOpen]);
 
   const navItems = [
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Experience", href: "#experience" },
-    { name: "Contact", href: "#contact" },
+    { name: "About", href: "#about", icon: BookOpen },
+    { name: "Skills", href: "#skills", icon: Award },
+    { name: "Projects", href: "#projects", icon: Briefcase },
+    { name: "Experience", href: "#experience", icon: Award },
+    { name: "Contact", href: "#contact", icon: BookOpen },
   ];
 
   return (
@@ -55,16 +55,19 @@ const Navbar = ({ toggleTheme, isDarkMode }: NavbarProps) => {
     >
       <div className="container flex items-center justify-between h-16 md:h-20">
         <a href="#" className="text-2xl font-serif font-bold text-mint">
-          JD
+          JS
         </a>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center space-x-8">
-          <ul className="flex items-center space-x-6">
+          <ul className="flex items-center space-x-8">
             {navItems.map((item, index) => (
               <li key={item.name} className="opacity-0 animate-fade-in" style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'forwards' }}>
-                <a href={item.href} className="nav-link">
-                  <span className="text-mint mr-1 text-sm">{index + 1}.</span> {item.name}
+                <a href={item.href} className="nav-link group flex items-center">
+                  <span className="text-mint mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <item.icon size={16} />
+                  </span> 
+                  {item.name}
                 </a>
               </li>
             ))}
@@ -135,10 +138,12 @@ const Navbar = ({ toggleTheme, isDarkMode }: NavbarProps) => {
                 <li key={item.name}>
                   <a
                     href={item.href}
-                    className="text-lg nav-link block py-2"
+                    className="text-lg nav-link flex items-center py-2"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    <span className="text-mint mr-2">{index + 1}.</span>
+                    <span className="text-mint mr-3">
+                      <item.icon size={18} />
+                    </span>
                     {item.name}
                   </a>
                 </li>

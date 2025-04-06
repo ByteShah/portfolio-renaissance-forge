@@ -4,10 +4,10 @@ import { ArrowRight, Github, Linkedin, Twitter, Mail } from "lucide-react";
 
 const Hero = () => {
   const socialLinks = [
-    { icon: Github, href: "https://github.com/johndoe", label: "GitHub" },
-    { icon: Linkedin, href: "https://linkedin.com/in/johndoe", label: "LinkedIn" },
-    { icon: Twitter, href: "https://twitter.com/johndoe", label: "Twitter" },
-    { icon: Mail, href: "mailto:john@example.com", label: "Email" },
+    { icon: Github, href: "https://github.com/jaiminshah", label: "GitHub" },
+    { icon: Linkedin, href: "https://linkedin.com/in/jaiminshah", label: "LinkedIn" },
+    { icon: Twitter, href: "https://twitter.com/jaiminshah", label: "Twitter" },
+    { icon: Mail, href: "mailto:s1.jaimin@gmail.com", label: "Email" },
   ];
 
   return (
@@ -20,15 +20,15 @@ const Hero = () => {
             </p>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold opacity-0 animate-fade-in" style={{ animationDelay: '400ms' }}>
-              John Doe.
+              Jaimin Shah.
             </h1>
             
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate opacity-0 animate-fade-in" style={{ animationDelay: '500ms' }}>
-              I build things for the web.
+              Senior Odoo Developer & AI Specialist.
             </h2>
             
             <p className="text-slate max-w-lg opacity-0 animate-fade-in" style={{ animationDelay: '600ms' }}>
-              I'm a frontend developer specializing in building exceptional digital experiences. Currently, I'm focused on building accessible, human-centered products.
+              With 3.3+ years of expertise in end-to-end ERP solutions, AI integrations, and complex module development. Delivered 15+ cross-functional projects for global clients, automating workflows and reducing operational costs by 30-70%.
             </p>
             
             <div className="flex gap-4 opacity-0 animate-fade-in" style={{ animationDelay: '700ms' }}>
@@ -73,7 +73,7 @@ const Hero = () => {
                 <div className="w-48 h-48 md:w-72 md:h-72 rounded-full bg-navy-light border border-mint/20 overflow-hidden">
                   {/* Placeholder for profile image or avatar */}
                   <div className="w-full h-full flex items-center justify-center text-mint font-serif text-5xl">
-                    JD
+                    JS
                   </div>
                 </div>
               </div>
