@@ -100,12 +100,7 @@ const Skills = () => {
             {displayedSkills.map((skill, index) => (
               <div 
                 key={skill.name} 
-                className="skill-item"
-                style={{ 
-                  opacity: 0, 
-                  animation: 'fade-in-up 0.5s forwards',
-                  animationDelay: `${index * 50}ms`
-                }}
+                className="skill-item bg-navy-light p-3 rounded-md shadow-md flex justify-between items-center"
               >
                 <div className="flex-1">
                   <span className="text-slate-lightest">{skill.name}</span>

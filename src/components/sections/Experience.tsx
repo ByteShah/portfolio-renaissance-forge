@@ -17,42 +17,42 @@ const Experience = () => {
 
   const experiences: JobExperience[] = [
     {
-      company: "Tech Solutions Inc.",
-      title: "Senior Frontend Developer",
-      date: "January 2022 - Present",
-      location: "San Francisco, CA",
+      company: "Got2 India",
+      title: "Sr. Odoo Developer",
+      date: "January 2024 - Present",
+      location: "Ahmedabad, Gujarat",
       description: [
-        "Lead front-end development for a SaaS platform serving over 50,000 users, resulting in a 30% improvement in user engagement metrics.",
-        "Developed and maintained reusable component library in React, improving team development efficiency by 40%.",
-        "Collaborated with UX/UI designers to implement responsive, accessible interfaces across the application.",
-        "Mentored junior developers and conducted code reviews to ensure quality and best practices.",
-        "Implemented automated testing strategies that increased code coverage from 60% to 90%."
+        "Built end-to-end Odoo eCommerce solution with product configurators, multi-vendor support, and RazorPay/Stripe integrations.",
+        "Designed responsive website themes (HTML5, CSS3, Bootstrap) improving mobile conversion rates by 25%.",
+        "Developed AI chatbot to analyze customer interactions (post-engagement) and auto-suggest responses.",
+        "Integrated appointment scheduling logic to book slots with providers based on availability (Calendar module), reducing manual coordination by 50%.",
+        "Created modular email template snippets (QWeb) for cart abandonment, order confirmations, and promotions, increasing click-through rates by 40%."
       ]
     },
     {
-      company: "Digital Innovations",
-      title: "Frontend Developer",
-      date: "March 2020 - December 2021",
-      location: "San Francisco, CA",
+      company: "Odoo India PVT LTD",
+      title: "Odoo Developer",
+      date: "January 2022 - January 2024",
+      location: "Remote",
       description: [
-        "Rebuilt the company's main product using React, TypeScript, and Tailwind CSS, improving performance by 45%.",
-        "Integrated RESTful APIs and GraphQL endpoints to create dynamic and interactive user interfaces.",
-        "Collaborated with back-end team to design and implement new features and improvements.",
-        "Participated in agile development processes, including daily stand-ups, sprint planning, and retrospectives.",
-        "Optimized application performance through code splitting, lazy loading, and efficient state management."
+        "Built Sales Forecasting Dashboard (Python + OWL) with time-series analysis, boosting inventory planning accuracy by 45%.",
+        "Developed Stock Traceability Dashboard, reducing discrepancies by 60% via real-time tracking.",
+        "Led 15+ Tally-to-Odoo transitions, including custom API development for HRMS/logistics integrations.",
+        "Created collaborative drawing app (OWL + Odoo Knowledge) with attachment-based data storage.",
+        "Mentored 8 junior developers; conducted 50+ technical interviews."
       ]
     },
     {
-      company: "Web Crafters",
-      title: "Junior Developer",
-      date: "June 2018 - February 2020",
-      location: "San Francisco, CA",
+      company: "Level.ai",
+      title: "AI Research Associate",
+      date: "December 2021 - January 2022",
+      location: "Remote",
       description: [
-        "Assisted in the development of responsive websites for various clients using HTML, CSS, and JavaScript.",
-        "Built interactive components and animations to enhance user experience across multiple projects.",
-        "Participated in client meetings to understand requirements and provide technical insights.",
-        "Maintained and updated existing websites, improving SEO rankings and performance metrics.",
-        "Collaborated with design team to ensure pixel-perfect implementation of mockups."
+        "Developed machine learning models for stock prediction using LSTM and CNN architectures.",
+        "Integrated sentiment analysis with time-series forecasting to improve prediction accuracy.",
+        "Created an AI-powered library management system that auto-populated book records using Google Books API and web scraping.",
+        "Built a React dashboard with JWT authentication, reducing manual data entry by 80%.",
+        "Implemented noise-filtered EMG signal processing for gesture recognition with 95% accuracy."
       ]
     },
   ];
@@ -62,7 +62,7 @@ const Experience = () => {
       <div className="container mx-auto">
         <div className="numbered-heading mb-12">
           <h2 className="text-2xl md:text-3xl font-bold">
-            <span className="text-mint mr-2">04.</span> Experience
+            Experience
           </h2>
         </div>
         
