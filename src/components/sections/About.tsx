@@ -3,11 +3,11 @@ import { CheckCircle } from "lucide-react";
 
 const About = () => {
   const values = [
-    "User-Centered Design Approach",
-    "Clean, Maintainable Code",
+    "Innovative Problem Solving",
     "Continuous Learning",
-    "Attention to Detail",
-    "Collaborative Mindset",
+    "Detail-Oriented Development",
+    "Collaborative Approach",
+    "Technical Excellence",
   ];
 
   return (
@@ -15,22 +15,22 @@ const About = () => {
       <div className="container mx-auto">
         <div className="numbered-heading mb-12">
           <h2 className="text-2xl md:text-3xl font-bold">
-            <span className="text-mint mr-2">01.</span> About Me
+            About Me
           </h2>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <p className="text-slate-light leading-relaxed">
-              Hello! I'm John, a passionate frontend developer with a keen eye for creating beautiful, functional, and user-friendly websites. My journey in web development began in 2018, and I've been hooked ever since.
+              Hello! I'm Jaimin, a Senior Odoo Developer with 3.3+ years of expertise in end-to-end ERP solutions, AI integrations, and complex module development. I've delivered 15+ cross-functional projects for global clients, automating workflows and reducing operational costs by 30-70%.
             </p>
             
             <p className="text-slate-light leading-relaxed">
-              I enjoy the process of transforming ideas into reality using creative solutions. I'm always curious about learning new skills, tools, and concepts. In addition to development, I also love design and consider both aesthetics and functionality to be equally important.
+              My technical journey spans from developing custom Odoo modules to implementing AI-powered solutions. I'm proficient in Python, JavaScript (ES6+), TypeScript, and SQL, with expertise in frameworks like OWL (Odoo Web Library) and React.js.
             </p>
             
             <p className="text-slate-light leading-relaxed">
-              When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or enjoying outdoor activities.
+              In addition to my development work, I've contributed to academic research in machine learning models for stock prediction and big data analytics for the oil and gas industry, published with Elsevier and Taylor & Francis Group.
             </p>
             
             <div className="mt-8">

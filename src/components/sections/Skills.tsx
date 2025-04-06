@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 interface Skill {
   name: string;
   level: number; // 1-5
-  category: "frontend" | "backend" | "design" | "tools";
+  category: "odoo" | "languages" | "frameworks" | "tools" | "data_ml";
 }
 
 const Skills = () => {
@@ -16,46 +16,50 @@ const Skills = () => {
 
   const categories = [
     { id: "all", name: "All Skills" },
-    { id: "frontend", name: "Frontend" },
-    { id: "backend", name: "Backend" },
-    { id: "design", name: "Design" },
-    { id: "tools", name: "Tools & Others" },
+    { id: "odoo", name: "Odoo Modules" },
+    { id: "languages", name: "Languages" },
+    { id: "frameworks", name: "Frameworks" },
+    { id: "tools", name: "Tools" },
+    { id: "data_ml", name: "Data & ML" },
   ];
 
   const allSkills: Skill[] = [
-    // Frontend
-    { name: "HTML5", level: 5, category: "frontend" },
-    { name: "CSS3", level: 5, category: "frontend" },
-    { name: "JavaScript", level: 5, category: "frontend" },
-    { name: "TypeScript", level: 4, category: "frontend" },
-    { name: "React", level: 5, category: "frontend" },
-    { name: "Next.js", level: 4, category: "frontend" },
-    { name: "Tailwind CSS", level: 5, category: "frontend" },
-    { name: "Redux", level: 4, category: "frontend" },
-    { name: "Framer Motion", level: 3, category: "frontend" },
+    // Odoo Modules
+    { name: "Accounting", level: 5, category: "odoo" },
+    { name: "Sales", level: 5, category: "odoo" },
+    { name: "eCommerce", level: 5, category: "odoo" },
+    { name: "Website", level: 5, category: "odoo" },
+    { name: "Inventory", level: 4, category: "odoo" },
+    { name: "CRM", level: 4, category: "odoo" },
+    { name: "Knowledge", level: 4, category: "odoo" },
+    { name: "HRMS", level: 4, category: "odoo" },
     
-    // Backend
-    { name: "Node.js", level: 4, category: "backend" },
-    { name: "Express", level: 4, category: "backend" },
-    { name: "MongoDB", level: 3, category: "backend" },
-    { name: "Firebase", level: 4, category: "backend" },
-    { name: "RESTful APIs", level: 4, category: "backend" },
-    { name: "GraphQL", level: 3, category: "backend" },
+    // Languages
+    { name: "Python", level: 5, category: "languages" },
+    { name: "JavaScript (ES6+)", level: 4, category: "languages" },
+    { name: "TypeScript", level: 4, category: "languages" },
+    { name: "SQL", level: 4, category: "languages" },
+    { name: "XML", level: 4, category: "languages" },
+    { name: "HTML/CSS", level: 4, category: "languages" },
     
-    // Design
-    { name: "Figma", level: 4, category: "design" },
-    { name: "Adobe XD", level: 3, category: "design" },
-    { name: "UI/UX", level: 4, category: "design" },
-    { name: "Responsive Design", level: 5, category: "design" },
+    // Frameworks
+    { name: "OWL", level: 5, category: "frameworks" },
+    { name: "React.js", level: 4, category: "frameworks" },
+    { name: "Flask", level: 3, category: "frameworks" },
     
-    // Tools & Others
+    // Tools
+    { name: "PostgreSQL", level: 4, category: "tools" },
+    { name: "Docker", level: 4, category: "tools" },
     { name: "Git", level: 5, category: "tools" },
-    { name: "GitHub", level: 5, category: "tools" },
-    { name: "Jest", level: 3, category: "tools" },
-    { name: "Webpack", level: 3, category: "tools" },
-    { name: "Vite", level: 4, category: "tools" },
-    { name: "Agile/Scrum", level: 4, category: "tools" },
-    { name: "VS Code", level: 5, category: "tools" },
+    { name: "Power BI", level: 4, category: "tools" },
+    { name: "Postman", level: 4, category: "tools" },
+    
+    // Data & ML
+    { name: "TensorFlow", level: 4, category: "data_ml" },
+    { name: "Pandas", level: 5, category: "data_ml" },
+    { name: "Scikit-learn", level: 4, category: "data_ml" },
+    { name: "Keras", level: 3, category: "data_ml" },
+    { name: "Time-Series Forecasting", level: 4, category: "data_ml" },
   ];
 
   const filteredSkills = activeCategory === "all" 
@@ -69,7 +73,7 @@ const Skills = () => {
       <div className="container mx-auto">
         <div className="numbered-heading mb-12">
           <h2 className="text-2xl md:text-3xl font-bold">
-            <span className="text-mint mr-2">02.</span> Skills
+            Skills
           </h2>
         </div>
         
@@ -98,7 +102,6 @@ const Skills = () => {
                 key={skill.name} 
                 className="skill-item"
                 style={{ 
-                  animationDelay: `${index * 50}ms`, 
                   opacity: 0, 
                   animation: 'fade-in-up 0.5s forwards',
                   animationDelay: `${index * 50}ms`
