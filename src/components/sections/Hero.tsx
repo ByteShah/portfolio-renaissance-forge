@@ -18,28 +18,28 @@ const Hero = () => {
             <p className="text-mint opacity-0 animate-fade-in" style={{ animationDelay: '300ms' }}>
               Hi, my name is
             </p>
-            
+
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold opacity-0 animate-fade-in" style={{ animationDelay: '400ms' }}>
               Jaimin Shah.
             </h1>
-            
+
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate opacity-0 animate-fade-in" style={{ animationDelay: '500ms' }}>
               Senior Odoo Developer & AI Specialist.
             </h2>
-            
+
             <p className="text-slate max-w-lg opacity-0 animate-fade-in" style={{ animationDelay: '600ms' }}>
-              With 3.3+ years of expertise in end-to-end ERP solutions, AI integrations, and complex module development. Delivered 15+ cross-functional projects for global clients, automating workflows and reducing operational costs by 30-70%.
+              With 4.3+ years of expertise in end-to-end ERP solutions, AI integrations, and complex module development. Delivered 15+ cross-functional projects for global clients, automating workflows and reducing operational costs by 30-70%.
             </p>
-            
+
             <div className="flex gap-4 opacity-0 animate-fade-in" style={{ animationDelay: '700ms' }}>
-              <Button 
+              <Button
                 className="bg-transparent border border-mint text-mint hover:bg-mint/10 transition-all duration-300 group"
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Contact Me
                 <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
-              
+
               <Button
                 variant="outline"
                 className="border-mint/30 text-slate hover:text-mint hover:border-mint/60"
@@ -48,7 +48,7 @@ const Hero = () => {
                 View Work
               </Button>
             </div>
-            
+
             <div className="flex items-center gap-6 pt-4 opacity-0 animate-fade-in" style={{ animationDelay: '800ms' }}>
               {socialLinks.map((link, index) => (
                 <a
@@ -64,7 +64,7 @@ const Hero = () => {
               ))}
             </div>
           </div>
-          
+
           <div className="flex-1 flex justify-center opacity-0 animate-fade-in" style={{ animationDelay: '900ms' }}>
             <div className="relative w-64 h-64 md:w-96 md:h-96">
               <div className="absolute inset-0 bg-mint/10 rounded-full animate-pulse-light"></div>
