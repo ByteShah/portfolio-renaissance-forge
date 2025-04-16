@@ -30,6 +30,7 @@ const Projects = () => {
       title: "AI-Powered eCommerce Platform",
       description: "Built end-to-end Odoo eCommerce solution with product configurators, multi-vendor support, and payment integrations. Designed responsive website themes improving mobile conversion rates by 25%.",
       tags: ["Odoo", "Python", "OWL", "eCommerce", "RazorPay/Stripe"],
+      image: "/ecomm.jpg",
       github: "",
       demo: "",
       featured: true,
@@ -39,6 +40,7 @@ const Projects = () => {
       title: "AI-Powered Engagement Automation",
       description: "Developed AI chatbot to analyze customer interactions and auto-suggest responses. Integrated appointment scheduling logic to book slots with providers based on availability, reducing manual coordination by 50%.",
       tags: ["Python", "AI", "Calendar Module", "Automation"],
+      image: "/chat.jpg",
       github: "",
       demo: "",
       featured: true,
@@ -48,6 +50,7 @@ const Projects = () => {
       title: "OHIP Insurance Platform",
       description: "Integrated OHIP API for real-time patient verification using medical card numbers. Developed WSDL-based MCEDT integration for insurance payment reconciliation, enabling automated claim tracking and reducing payment delays by 30%.",
       tags: ["Odoo", "API Integration", "WSDL", "XML/EDI", "Accounting"],
+      image: "/insurance.jpg",
       github: "",
       demo: "",
       featured: true,
@@ -151,10 +154,25 @@ const Projects = () => {
                 )}>
                   <div className="relative group aspect-video overflow-hidden rounded-lg">
                     <div className="absolute inset-0 bg-mint/10 group-hover:bg-transparent transition-all duration-300"></div>
-                    <div className="w-full h-full bg-navy flex items-center justify-center text-slate border border-navy-lightest group-hover:border-mint/50 transition-all duration-300">
-                      {/* Project image placeholder */}
-                      <FolderOpen size={48} className="text-mint opacity-20" />
-                    </div>
+                    {project.image ? (
+                      <>
+                        <img 
+                          src={project.image} 
+                          alt={project.title} 
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                          <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <h4 className="text-mint font-bold text-xl mb-2">{project.title}</h4>
+                            <p className="text-slate-light text-sm line-clamp-2">{project.description}</p>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="w-full h-full bg-navy flex items-center justify-center text-slate border border-navy-lightest group-hover:border-mint/50 transition-all duration-300">
+                        <FolderOpen size={48} className="text-mint opacity-20" />
+                      </div>
+                    )}
                   </div>
                 </div>
                 
@@ -217,16 +235,19 @@ const Projects = () => {
         <h3 className="text-xl font-bold text-slate-lightest mb-8 text-center">Other Noteworthy Projects</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {otherProjects.map((project) => (
-            <div key={project.title} className="project-card h-full p-6">
+            <div key={project.title} className="project-card h-full p-6 group hover:bg-navy-light transition-colors duration-300 rounded-lg">
               <div className="flex justify-between items-start mb-6">
-                <FolderOpen size={40} className="text-mint" />
+                <div className="relative">
+                  <div className="absolute -inset-1 bg-mint/20 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <FolderOpen size={40} className="text-mint relative z-10 transform group-hover:scale-110 transition-transform duration-300" />
+                </div>
                 <div className="flex gap-4">
                   {project.github && (
                     <a 
                       href={project.github} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-slate hover:text-mint transition-colors"
+                      className="text-slate hover:text-mint transition-colors transform hover:-translate-y-1"
                     >
                       <Github size={20} />
                     </a>
@@ -236,7 +257,7 @@ const Projects = () => {
                       href={project.demo} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-slate hover:text-mint transition-colors"
+                      className="text-slate hover:text-mint transition-colors transform hover:-translate-y-1"
                     >
                       <ExternalLink size={20} />
                     </a>
@@ -244,12 +265,12 @@ const Projects = () => {
                 </div>
               </div>
               
-              <h3 className="text-xl font-bold text-slate-lightest mb-3">{project.title}</h3>
+              <h3 className="text-xl font-bold text-slate-lightest mb-3 group-hover:text-mint transition-colors duration-300">{project.title}</h3>
               <p className="text-slate-light mb-4 flex-grow">{project.description}</p>
               
               <div className="flex flex-wrap gap-2 mt-auto pt-4">
                 {project.tags.map((tag) => (
-                  <span key={tag} className="text-slate text-xs">
+                  <span key={tag} className="text-slate text-xs bg-navy-light px-2 py-1 rounded-full">
                     {tag}
                   </span>
                 ))}

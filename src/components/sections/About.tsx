@@ -48,10 +48,11 @@ const About = () => {
           <div className="relative">
             <div className="relative z-10 overflow-hidden rounded-lg border-2 border-mint shadow-xl max-w-md mx-auto">
               <div className="bg-navy-lightest aspect-square flex items-center justify-center">
-                {/* Placeholder for image */}
-                <div className="w-full h-full bg-gradient-to-br from-navy to-navy-light flex items-center justify-center text-white text-lg font-medium">
-                  Profile Image
-                </div>
+                <img 
+                  src="/profile.jpeg" 
+                  alt="Jaimin Shah" 
+                  className="w-full h-full object-cover"
+                />
               </div>
 
               <div className="absolute -z-10 top-4 left-4 w-full h-full bg-mint/20 rounded-lg"></div>

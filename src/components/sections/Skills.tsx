@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ChevronDown, ChevronUp, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -12,6 +12,21 @@ interface Skill {
 const Skills = () => {
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [isExpanded, setIsExpanded] = useState(false);
+  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+  const [animatedSkills, setAnimatedSkills] = useState<{[key: string]: boolean}>({});
+
+  // Animate skills on mount
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const initialAnimated: {[key: string]: boolean} = {};
+      allSkills.forEach(skill => {
+        initialAnimated[skill.name] = true;
+      });
+      setAnimatedSkills(initialAnimated);
+    }, 300);
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   const categories = [
     { id: "all", name: "All Skills" },
@@ -99,19 +114,44 @@ const Skills = () => {
             {displayedSkills.map((skill, index) => (
               <div 
                 key={skill.name} 
-                className="skill-item bg-navy-light p-3 rounded-md shadow-md flex flex-col sm:flex-row justify-between items-center"
+                className={cn(
+                  "skill-item bg-navy-light p-3 rounded-md shadow-md flex flex-col sm:flex-row justify-between items-center group transition-all duration-300",
+                  hoveredSkill === skill.name ? "bg-navy-lightest shadow-lg shadow-mint/10" : "",
+                  "hover:bg-navy-lightest hover:shadow-lg hover:shadow-mint/10"
+                )}
+                onMouseEnter={() => setHoveredSkill(skill.name)}
+                onMouseLeave={() => setHoveredSkill(null)}
+                style={{
+                  animationDelay: `${index * 50}ms`,
+                  opacity: animatedSkills[skill.name] ? 1 : 0,
+                  transform: animatedSkills[skill.name] ? 'translateY(0)' : 'translateY(20px)',
+                  transition: 'opacity 0.5s ease, transform 0.5s ease'
+                }}
               >
-                <div className="flex-1 mb-2 sm:mb-0">
-                  <span className="text-slate-lightest dark:text-slate-lightest text-navy font-medium">{skill.name}</span>
+                <div className="flex-1 mb-2 sm:mb-0 flex items-center">
+                  <span className="text-slate-lightest dark:text-slate-lightest text-navy font-medium group-hover:text-mint transition-colors duration-300">
+                    {skill.name}
+                  </span>
+                  {skill.level === 5 && hoveredSkill === skill.name && (
+                    <Sparkles size={14} className="ml-1 text-mint animate-pulse" />
+                  )}
                 </div>
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
                     <div 
                       key={i} 
                       className={cn(
-                        "w-2.5 h-2.5 sm:w-2 sm:h-2 rounded-full mx-1 sm:mx-0.5", 
-                        i < skill.level ? "bg-mint" : "bg-navy-lightest"
+                        "w-2.5 h-2.5 sm:w-2 sm:h-2 rounded-full mx-1 sm:mx-0.5 transition-all duration-300",
+                        i < skill.level 
+                          ? "bg-mint shadow-[0_0_8px_rgba(100,255,218,0.5)]" 
+                          : "bg-navy-lightest"
                       )}
+                      style={{
+                        transform: hoveredSkill === skill.name && i < skill.level 
+                          ? `scale(${1 + (i * 0.1)})` 
+                          : 'scale(1)',
+                        transitionDelay: `${i * 50}ms`
+                      }}
                     />
                   ))}
                 </div>

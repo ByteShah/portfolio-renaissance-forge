@@ -69,10 +69,19 @@ const Hero = () => {
               <div className="absolute inset-0 bg-mint/10 rounded-full animate-pulse-light"></div>
               <div className="absolute inset-4 border-2 border-dashed border-mint/30 rounded-full animate-spin-slow"></div>
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-48 h-48 md:w-72 md:h-72 rounded-full bg-navy-light border border-mint/20 overflow-hidden">
-                  {/* Placeholder for profile image or avatar */}
-                  <div className="w-full h-full flex items-center justify-center text-mint font-serif text-5xl">
-                    JS
+                <div className="w-48 h-48 md:w-72 md:h-72 rounded-full bg-navy-light border border-mint/20 overflow-hidden group">
+                  {/* Interactive JS initials */}
+                  <div className="w-full h-full flex items-center justify-center relative">
+                    <div className="absolute inset-0 bg-gradient-to-br from-mint/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="text-mint font-serif text-5xl md:text-7xl font-bold tracking-wider animate-pulse-light">
+                      <span className="inline-block transform group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300">J</span>
+                      <span className="inline-block transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">S</span>
+                    </div>
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-mint/10 flex items-center justify-center">
+                        <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-mint animate-spin-slow"></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
