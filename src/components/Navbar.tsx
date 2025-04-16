@@ -72,23 +72,23 @@ const Navbar = ({ toggleTheme, isDarkMode }: NavbarProps) => {
               </li>
             ))}
           </ul>
-          
+{/*           
           <Button 
             variant="outline" 
             className="border-mint text-mint hover:bg-mint/10"
             onClick={() => window.open('/resume.pdf', '_blank')}
           >
             Resume
-          </Button>
+          </Button> */}
           
-          <Button 
+          {/* <Button 
             variant="ghost" 
             size="icon" 
             className="text-slate hover:text-slate-lightest hover:bg-navy-light" 
             onClick={toggleTheme}
           >
             {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-          </Button>
+          </Button> */}
         </nav>
 
         {/* Mobile Menu Button */}
@@ -150,13 +150,13 @@ const Navbar = ({ toggleTheme, isDarkMode }: NavbarProps) => {
               ))}
             </ul>
             
-            <Button 
+            {/* <Button 
               variant="outline" 
               className="mt-8 w-full border-mint text-mint hover:bg-mint/10"
               onClick={() => window.open('/resume.pdf', '_blank')}
             >
               Resume
-            </Button>
+            </Button> */}
           </nav>
         </div>
       </div>

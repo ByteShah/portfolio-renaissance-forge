@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -61,7 +60,7 @@ const Experience = () => {
     <section id="experience" className="section-padding">
       <div className="container mx-auto">
         <div className="numbered-heading mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-lightest">
             Experience
           </h2>
         </div>

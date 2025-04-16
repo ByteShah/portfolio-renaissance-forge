@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -69,10 +68,10 @@ const Skills = () => {
   const displayedSkills = isExpanded ? filteredSkills : filteredSkills.slice(0, 12);
 
   return (
-    <section id="skills" className="section-padding">
+    <section id="skills" className="section-padding bg-navy-light">
       <div className="container mx-auto">
         <div className="numbered-heading mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold">
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-lightest">
             Skills
           </h2>
         </div>
@@ -100,17 +99,17 @@ const Skills = () => {
             {displayedSkills.map((skill, index) => (
               <div 
                 key={skill.name} 
-                className="skill-item bg-navy-light p-3 rounded-md shadow-md flex justify-between items-center"
+                className="skill-item bg-navy-light p-3 rounded-md shadow-md flex flex-col sm:flex-row justify-between items-center"
               >
-                <div className="flex-1">
-                  <span className="text-slate-lightest">{skill.name}</span>
+                <div className="flex-1 mb-2 sm:mb-0">
+                  <span className="text-slate-lightest dark:text-slate-lightest text-navy font-medium">{skill.name}</span>
                 </div>
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
                     <div 
                       key={i} 
                       className={cn(
-                        "w-1.5 h-1.5 rounded-full mx-0.5", 
+                        "w-2.5 h-2.5 sm:w-2 sm:h-2 rounded-full mx-1 sm:mx-0.5", 
                         i < skill.level ? "bg-mint" : "bg-navy-lightest"
                       )}
                     />

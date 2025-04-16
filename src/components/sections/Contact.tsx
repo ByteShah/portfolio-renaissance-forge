@@ -143,8 +143,8 @@ const Contact = () => {
         <div className="mt-12 text-center">
           <p className="text-slate">
             Prefer direct email?{" "}
-            <a href="mailto:john@example.com" className="underline-link">
-              john@example.com
+            <a href="mailto:s1.jaimin@gmail.com" className="underline-link">
+              s1.jaimin@gmail.com
             </a>
           </p>
         </div>

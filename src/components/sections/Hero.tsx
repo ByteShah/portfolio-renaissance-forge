@@ -1,12 +1,11 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Github, Linkedin, Twitter, Mail } from "lucide-react";
 
 const Hero = () => {
   const socialLinks = [
-    { icon: Github, href: "https://github.com/jaiminshah", label: "GitHub" },
-    { icon: Linkedin, href: "https://linkedin.com/in/jaiminshah", label: "LinkedIn" },
-    { icon: Twitter, href: "https://twitter.com/jaiminshah", label: "Twitter" },
+    { icon: Github, href: "https://github.com/ByteShah", label: "GitHub" },
+    { icon: Linkedin, href: "https://linkedin.com/in/jaiminshah198", label: "LinkedIn" },
+    // { icon: Twitter, href: "https://twitter.com/jaiminshah", label: "Twitter" },
     { icon: Mail, href: "mailto:s1.jaimin@gmail.com", label: "Email" },
   ];
 
@@ -15,7 +14,7 @@ const Hero = () => {
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row md:items-center gap-12">
           <div className="flex-1 space-y-6">
-            <p className="text-mint opacity-0 animate-fade-in" style={{ animationDelay: '300ms' }}>
+            <p className="text-navy dark:text-mint opacity-0 animate-fade-in" style={{ animationDelay: '300ms' }}>
               Hi, my name is
             </p>
 
@@ -23,11 +22,11 @@ const Hero = () => {
               Jaimin Shah.
             </h1>
 
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate opacity-0 animate-fade-in" style={{ animationDelay: '500ms' }}>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy dark:text-slate opacity-0 animate-fade-in" style={{ animationDelay: '500ms' }}>
               Senior Odoo Developer & AI Specialist.
             </h2>
 
-            <p className="text-slate max-w-lg opacity-0 animate-fade-in" style={{ animationDelay: '600ms' }}>
+            <p className="text-navy/80 dark:text-slate max-w-lg opacity-0 animate-fade-in" style={{ animationDelay: '600ms' }}>
               With 4.3+ years of expertise in end-to-end ERP solutions, AI integrations, and complex module development. Delivered 15+ cross-functional projects for global clients, automating workflows and reducing operational costs by 30-70%.
             </p>
 
@@ -42,7 +41,7 @@ const Hero = () => {
 
               <Button
                 variant="outline"
-                className="border-mint/30 text-slate hover:text-mint hover:border-mint/60"
+                className="border-navy dark:border-mint/30 text-navy dark:text-slate hover:text-mint hover:border-mint/60"
                 onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 View Work
@@ -57,7 +56,7 @@ const Hero = () => {
                   aria-label={link.label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate hover:text-mint transform hover:-translate-y-1 transition-all duration-200"
+                  className="text-navy dark:text-slate hover:text-mint transform hover:-translate-y-1 transition-all duration-200"
                 >
                   <link.icon size={20} />
                 </a>

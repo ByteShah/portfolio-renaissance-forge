@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -20,21 +19,22 @@ const Index = () => {
     
     if (savedMode) {
       setIsDarkMode(savedMode === 'dark');
-      document.documentElement.classList.toggle('light', savedMode === 'light');
+      document.documentElement.classList.toggle('dark', savedMode === 'dark');
     } else {
       setIsDarkMode(prefersDark);
-      document.documentElement.classList.toggle('light', !prefersDark);
+      document.documentElement.classList.toggle('dark', prefersDark);
     }
   }, []);
 
   const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle('light');
-    localStorage.setItem('theme', !isDarkMode ? 'dark' : 'light');
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', newMode ? 'dark' : 'light');
   };
 
   return (
-    <div className={cn("flex flex-col min-h-screen", isDarkMode ? "dark-theme" : "light-theme")}>
+    <div className={cn("flex flex-col min-h-screen bg-background text-foreground")}>
       <Navbar toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
       
       <main className="flex-1">
