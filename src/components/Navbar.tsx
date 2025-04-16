@@ -116,9 +116,10 @@ const Navbar = ({ toggleTheme, isDarkMode }: NavbarProps) => {
         <div
           id="mobile-menu"
           className={cn(
-            "fixed inset-y-0 right-0 w-3/4 bg-navy/95 backdrop-blur-md p-6 shadow-xl transform transition-transform duration-300 ease-in-out z-50 border-l border-navy-light/20",
+            "fixed top-0 right-0 bottom-0 w-3/4 bg-navy/95 backdrop-blur-md p-6 shadow-xl transform transition-transform duration-300 ease-in-out z-50 border-l border-navy-light/20",
             isMenuOpen ? "translate-x-0" : "translate-x-full"
           )}
+          style={{ height: '100vh' }}
         >
           <div className="flex justify-end">
             <Button
