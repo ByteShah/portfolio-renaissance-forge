@@ -93,14 +93,14 @@ const Navbar = ({ toggleTheme, isDarkMode }: NavbarProps) => {
 
         {/* Mobile Menu Button */}
         <div className="flex items-center md:hidden space-x-4">
-          <Button 
+          {/* <Button 
             variant="ghost" 
             size="icon" 
             className="text-slate hover:text-slate-lightest hover:bg-navy-light" 
             onClick={toggleTheme}
           >
             {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-          </Button>
+          </Button> */}
           
           <Button
             id="menu-button"
