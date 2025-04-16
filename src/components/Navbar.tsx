@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Menu, X, Moon, Sun, BookOpen, Award, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -117,7 +116,7 @@ const Navbar = ({ toggleTheme, isDarkMode }: NavbarProps) => {
         <div
           id="mobile-menu"
           className={cn(
-            "fixed inset-y-0 right-0 w-3/4 bg-navy-light p-6 shadow-xl transform transition-transform duration-300 ease-in-out z-50",
+            "fixed inset-y-0 right-0 w-3/4 bg-navy/95 backdrop-blur-md p-6 shadow-xl transform transition-transform duration-300 ease-in-out z-50 border-l border-navy-light/20",
             isMenuOpen ? "translate-x-0" : "translate-x-full"
           )}
         >
@@ -125,7 +124,7 @@ const Navbar = ({ toggleTheme, isDarkMode }: NavbarProps) => {
             <Button
               variant="ghost"
               size="icon"
-              className="text-slate hover:text-slate-lightest"
+              className="text-slate hover:text-slate-lightest hover:bg-navy-light/20"
               onClick={() => setIsMenuOpen(false)}
             >
               <X size={24} />
@@ -138,7 +137,7 @@ const Navbar = ({ toggleTheme, isDarkMode }: NavbarProps) => {
                 <li key={item.name}>
                   <a
                     href={item.href}
-                    className="text-lg nav-link flex items-center py-2"
+                    className="text-lg nav-link flex items-center py-2 hover:text-mint transition-colors duration-200"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     <span className="text-mint mr-3">
