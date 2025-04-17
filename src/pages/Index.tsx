@@ -13,17 +13,10 @@ const Index = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
 
   useEffect(() => {
-    // Check user's preference
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const savedMode = localStorage.getItem('theme');
-    
-    if (savedMode) {
-      setIsDarkMode(savedMode === 'dark');
-      document.documentElement.classList.toggle('dark', savedMode === 'dark');
-    } else {
-      setIsDarkMode(prefersDark);
-      document.documentElement.classList.toggle('dark', prefersDark);
-    }
+    // Always start in dark mode
+    setIsDarkMode(true);
+    document.documentElement.classList.add('dark');
+    localStorage.setItem('theme', 'dark');
   }, []);
 
   const toggleTheme = () => {
