@@ -16,16 +16,30 @@ const Experience = () => {
 
   const experiences: JobExperience[] = [
     {
-      company: "Got2 India",
-      title: "Sr. Odoo Developer",
-      date: "January 2024 - Present",
+      company: "SmartIT-LTD",
+      title: "Senior Odoo Developer",
+      date: "August 2025 - Present",
       location: "Ahmedabad, Gujarat",
       description: [
-        "Built end-to-end Odoo eCommerce solution with product configurators, multi-vendor support, and RazorPay/Stripe integrations.",
-        "Designed responsive website themes (HTML5, CSS3, Bootstrap) improving mobile conversion rates by 25%.",
-        "Developed AI chatbot to analyze customer interactions (post-engagement) and auto-suggest responses.",
-        "Integrated appointment scheduling logic to book slots with providers based on availability (Calendar module), reducing manual coordination by 50%.",
-        "Created modular email template snippets (QWeb) for cart abandonment, order confirmations, and promotions, increasing click-through rates by 40%."
+        "Developed multi-stage portal order approval workflow with manager validations and real-time notifications for Odoo eCommerce.",
+        "Implemented credit control checks at backend and portal levels with dynamic feedback for order approval engine.",
+        "Built multi-team helpdesk structure with role-based visibility, automatic ticket assignment based on workload and expertise.",
+        "Led migration of multiple custom modules from Odoo v14 to v19, modernizing OWL components and QWeb views.",
+        "Designed reusable ETL-style data migration framework (CSV/XML/SQL/API) with validation layers and checkpoints.",
+        "Integrated Odoo with Claude MCP for real-time database interaction with retry queues and async processing."
+      ]
+    },
+    {
+      company: "Got2 India",
+      title: "Senior Odoo Developer",
+      date: "January 2024 - August 2025",
+      location: "Ahmedabad, Gujarat",
+      description: [
+        "Built end-to-end custom eCommerce with product configurators, multi-vendor capability, and payment gateways (GoCardless/Stripe).",
+        "Developed AI module to analyze customer conversations and generate response suggestions with appointment scheduling automation.",
+        "Created OHIP Insurance Platform with real-time verification, MCEDT integration for payment reconciliation, and automated XML/EDI claim generation.",
+        "Designed Line of Credit (LoC) system with Plaid bank verification and Stripe payment workflows including credit disbursement and automated repayments.",
+        "Built custom OCR automation engine for vendor bills and customer invoices with intelligent matching logic and confidence scoring."
       ]
     },
     {

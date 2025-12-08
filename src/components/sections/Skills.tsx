@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 interface Skill {
   name: string;
   level: number; // 1-5
-  category: "odoo" | "languages" | "frameworks" | "tools" | "data_ml";
+  category: "odoo" | "languages" | "frameworks" | "tools" | "data_ml" | "integrations";
 }
 
 const Skills = () => {
@@ -34,6 +34,7 @@ const Skills = () => {
     { id: "languages", name: "Languages" },
     { id: "frameworks", name: "Frameworks" },
     { id: "tools", name: "Tools" },
+    { id: "integrations", name: "Integrations" },
     { id: "data_ml", name: "Data & ML" },
   ];
 
@@ -68,6 +69,13 @@ const Skills = () => {
     { name: "Power BI", level: 4, category: "tools" },
     { name: "Postman", level: 4, category: "tools" },
     
+    // Integrations
+    { name: "Twilio (VoIP/SMS)", level: 4, category: "integrations" },
+    { name: "OHIP API", level: 5, category: "integrations" },
+    { name: "OpenAI/Gemini LLMs", level: 4, category: "integrations" },
+    { name: "Plaid API", level: 4, category: "integrations" },
+    { name: "Stripe API", level: 5, category: "integrations" },
+
     // Data & ML
     { name: "TensorFlow", level: 4, category: "data_ml" },
     { name: "Pandas", level: 5, category: "data_ml" },
