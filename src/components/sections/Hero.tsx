@@ -47,8 +47,12 @@ const Hero = () => {
 
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(100, 255, 218, 0.2)';
+        ctx.fillStyle = 'rgba(168, 85, 247, 0.3)';
         ctx.fill();
+
+        // Add glow effect
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = 'rgba(168, 85, 247, 0.5)';
       });
 
       requestAnimationFrame(animate);
@@ -97,8 +101,8 @@ const Hero = () => {
               Hi, my name is
             </motion.p>
 
-            <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold"
+            <motion.h1
+              className="text-4xl md:text-5xl lg:text-6xl font-bold gradient-text"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
@@ -106,8 +110,8 @@ const Hero = () => {
               Jaimin Shah.
             </motion.h1>
 
-            <motion.h2 
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy dark:text-slate"
+            <motion.h2
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy dark:text-slate-light"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
@@ -124,14 +128,14 @@ const Hero = () => {
               With 4.3+ years of expertise in end-to-end ERP solutions, AI integrations, and complex module development. Delivered 15+ cross-functional projects for global clients, automating workflows and reducing operational costs by 30-70%.
             </motion.p>
 
-            <motion.div 
+            <motion.div
               className="flex gap-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
             >
               <Button
-                className="bg-transparent border border-mint text-mint hover:bg-mint/10 transition-all duration-300 group hover:scale-105"
+                className="bg-gradient-to-r from-violet to-electric text-white border-0 glow-button group"
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Contact Me
@@ -140,14 +144,14 @@ const Hero = () => {
 
               <Button
                 variant="outline"
-                className="border-navy dark:border-mint/30 text-navy dark:text-slate hover:text-mint hover:border-mint/60 hover:scale-105 transition-all duration-300"
+                className="border-violet/50 text-navy dark:text-slate-light hover:text-violet hover:border-violet hover:bg-violet/10 transition-all duration-300"
                 onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 View Work
               </Button>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               className="flex items-center gap-6 pt-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -160,7 +164,7 @@ const Hero = () => {
                   aria-label={link.label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-navy dark:text-slate hover:text-mint transform hover:-translate-y-1 transition-all duration-200"
+                  className="text-navy dark:text-slate hover:text-violet transform hover:-translate-y-1 transition-all duration-200"
                   whileHover={{ scale: 1.2, rotate: 5 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -170,56 +174,76 @@ const Hero = () => {
             </motion.div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="flex-1 flex justify-center"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.9, duration: 0.5 }}
           >
             <div className="relative w-64 h-64 md:w-96 md:h-96">
-              <motion.div 
-                className="absolute inset-0 bg-mint/10 rounded-full"
-                animate={{ 
+              <motion.div
+                className="absolute inset-0 rounded-full"
+                style={{
+                  background: 'radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%)'
+                }}
+                animate={{
                   scale: [1, 1.2, 1],
                   opacity: [0.5, 0.8, 0.5]
                 }}
-                transition={{ 
+                transition={{
                   duration: 3,
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
               />
-              <motion.div 
-                className="absolute inset-4 border-2 border-dashed border-mint/30 rounded-full"
+              <motion.div
+                className="absolute inset-4 border-2 border-dashed border-violet/30 rounded-full"
                 animate={{ rotate: 360 }}
-                transition={{ 
+                transition={{
                   duration: 20,
                   repeat: Infinity,
                   ease: "linear"
                 }}
               />
+              <motion.div
+                className="absolute inset-8 border border-electric/20 rounded-full"
+                animate={{ rotate: -360 }}
+                transition={{
+                  duration: 15,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+              />
               <div className="absolute inset-0 flex items-center justify-center">
-                <motion.div 
-                  className="w-48 h-48 md:w-72 md:h-72 rounded-full bg-navy-light border border-mint/20 overflow-hidden group"
+                <motion.div
+                  className="w-48 h-48 md:w-72 md:h-72 rounded-full overflow-hidden group"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(26, 19, 51, 0.9) 0%, rgba(45, 35, 71, 0.8) 100%)',
+                    border: '1px solid rgba(168, 85, 247, 0.3)',
+                    boxShadow: '0 0 40px rgba(168, 85, 247, 0.2), inset 0 0 40px rgba(168, 85, 247, 0.1)'
+                  }}
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   <div className="w-full h-full flex items-center justify-center relative">
-                    <motion.div 
-                      className="absolute inset-0 bg-gradient-to-br from-mint/20 to-transparent"
+                    <motion.div
+                      className="absolute inset-0"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.2) 0%, transparent 50%, rgba(232, 121, 249, 0.1) 100%)'
+                      }}
                       initial={{ opacity: 0 }}
                       whileHover={{ opacity: 1 }}
                       transition={{ duration: 0.3 }}
                     />
-                    <div className="text-mint font-serif text-5xl md:text-7xl font-bold tracking-wider">
-                      <motion.span 
+                    <div className="gradient-text font-serif text-5xl md:text-7xl font-bold tracking-wider">
+                      <motion.span
                         className="inline-block"
                         whileHover={{ scale: 1.2, rotate: -10 }}
                         transition={{ type: "spring", stiffness: 300 }}
                       >
                         J
                       </motion.span>
-                      <motion.span 
+                      <motion.span
                         className="inline-block"
                         whileHover={{ scale: 1.2, rotate: 10 }}
                         transition={{ type: "spring", stiffness: 300 }}
@@ -227,24 +251,6 @@ const Hero = () => {
                         S
                       </motion.span>
                     </div>
-                    <motion.div 
-                      className="absolute inset-0 flex items-center justify-center"
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 1 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-mint/10 flex items-center justify-center">
-                        <motion.div 
-                          className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-mint"
-                          animate={{ rotate: 360 }}
-                          transition={{ 
-                            duration: 2,
-                            repeat: Infinity,
-                            ease: "linear"
-                          }}
-                        />
-                      </div>
-                    </motion.div>
                   </div>
                 </motion.div>
               </div>

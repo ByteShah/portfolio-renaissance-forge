@@ -6,65 +6,65 @@
 
 @layer base {
   :root {
-    --background: 210 33% 98%;
-    --foreground: 217 33% 10%;
+    --background: 270 30% 98%;
+    --foreground: 270 50% 10%;
 
-    --card: 213 20% 98%;
-    --card-foreground: 217 33% 10%;
+    --card: 270 20% 96%;
+    --card-foreground: 270 50% 10%;
 
-    --popover: 213 20% 98%;
-    --popover-foreground: 217 33% 10%;
+    --popover: 270 20% 96%;
+    --popover-foreground: 270 50% 10%;
 
-    --primary: 171 100% 35%;
-    --primary-foreground: 213 20% 98%;
+    --primary: 270 91% 65%;
+    --primary-foreground: 270 20% 98%;
 
-    --secondary: 213 20% 90%;
-    --secondary-foreground: 217 33% 10%;
+    --secondary: 270 20% 90%;
+    --secondary-foreground: 270 50% 10%;
 
-    --muted: 213 20% 90%;
-    --muted-foreground: 217 30% 25%;
+    --muted: 270 20% 90%;
+    --muted-foreground: 270 30% 35%;
 
-    --accent: 213 20% 90%;
-    --accent-foreground: 217 33% 10%;
+    --accent: 270 20% 90%;
+    --accent-foreground: 270 50% 10%;
 
     --destructive: 0 72% 51%;
-    --destructive-foreground: 213 20% 98%;
+    --destructive-foreground: 270 20% 98%;
 
-    --border: 213 20% 85%;
-    --input: 213 20% 85%;
-    --ring: 171 100% 40%;
+    --border: 270 20% 85%;
+    --input: 270 20% 85%;
+    --ring: 270 91% 65%;
 
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 210 33% 9%;
-    --foreground: 213 20% 92%;
+    --background: 270 50% 6%;
+    --foreground: 270 20% 92%;
 
-    --card: 217 33% 17%;
-    --card-foreground: 213 20% 92%;
+    --card: 270 40% 12%;
+    --card-foreground: 270 20% 92%;
 
-    --popover: 217 33% 17%;
-    --popover-foreground: 213 20% 92%;
+    --popover: 270 40% 12%;
+    --popover-foreground: 270 20% 92%;
 
-    --primary: 171 100% 68%;
-    --primary-foreground: 210 33% 9%;
+    --primary: 270 91% 65%;
+    --primary-foreground: 270 50% 6%;
 
-    --secondary: 217 32% 17%;
-    --secondary-foreground: 213 20% 92%;
+    --secondary: 270 40% 15%;
+    --secondary-foreground: 270 20% 92%;
 
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 270 40% 15%;
+    --muted-foreground: 270 20% 65%;
 
-    --accent: 217 33% 17%;
-    --accent-foreground: 213 20% 92%;
+    --accent: 270 40% 15%;
+    --accent-foreground: 270 20% 92%;
 
     --destructive: 0 62% 65%;
-    --destructive-foreground: 213 20% 92%;
+    --destructive-foreground: 270 20% 92%;
 
-    --border: 217 33% 25%;
-    --input: 217 33% 25%;
-    --ring: 171 100% 68%;
+    --border: 270 40% 20%;
+    --input: 270 40% 20%;
+    --ring: 270 91% 65%;
   }
 }
 
@@ -114,7 +114,8 @@
 
   .nav-link::after {
     content: "";
-    @apply absolute left-0 -bottom-1 w-0 h-0.5 bg-mint transition-all duration-200;
+    @apply absolute left-0 -bottom-1 w-0 h-0.5 transition-all duration-200;
+    background: linear-gradient(90deg, #a855f7, #e879f9);
   }
 
   .nav-link:hover::after {
@@ -122,12 +123,13 @@
   }
 
   .underline-link {
-    @apply relative text-mint inline-block;
+    @apply relative text-violet inline-block;
   }
 
   .underline-link::after {
     content: "";
-    @apply absolute left-0 bottom-0 w-0 h-0.5 bg-mint transition-all duration-200;
+    @apply absolute left-0 bottom-0 w-0 h-0.5 transition-all duration-200;
+    background: linear-gradient(90deg, #a855f7, #e879f9);
   }
 
   .underline-link:hover::after {
@@ -136,16 +138,67 @@
 
   /* Project card styling */
   .project-card {
-    @apply relative rounded-lg overflow-hidden bg-navy-light border border-navy-lightest transition-all duration-300;
+    @apply relative rounded-xl overflow-hidden bg-navy-light border border-navy-lightest transition-all duration-300;
+    background: linear-gradient(135deg, rgba(26, 19, 51, 0.8) 0%, rgba(15, 10, 31, 0.9) 100%);
   }
 
   .project-card:hover {
-    @apply border-mint/50 translate-y-[-5px] shadow-lg shadow-mint/5;
+    @apply border-violet-light/50 translate-y-[-5px];
+    box-shadow: 0 20px 40px -15px rgba(168, 85, 247, 0.3), 0 0 30px rgba(168, 85, 247, 0.1);
   }
 
   /* Skill item styling */
   .skill-item {
-    @apply flex items-center gap-2 px-4 py-2 rounded-full bg-navy-light border border-navy-lightest transition-all duration-200 hover:border-mint/50;
+    @apply flex items-center gap-2 px-4 py-2 rounded-full bg-navy-light border border-navy-lightest transition-all duration-200;
+    background: linear-gradient(135deg, rgba(26, 19, 51, 0.6) 0%, rgba(45, 35, 71, 0.4) 100%);
+  }
+
+  .skill-item:hover {
+    @apply border-violet-light/50;
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #a855f7 0%, #e879f9 50%, #c084fc 100%);
+  }
+
+  /* Glow button */
+  .glow-button {
+    @apply relative overflow-hidden;
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .glow-button:hover {
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.5), 0 0 60px rgba(168, 85, 247, 0.3);
+    transform: translateY(-2px);
+  }
+
+  /* Glass morphism card */
+  .glass-card {
+    background: linear-gradient(135deg, rgba(26, 19, 51, 0.7) 0%, rgba(15, 10, 31, 0.8) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(168, 85, 247, 0.1);
+  }
+
+  /* Animated gradient border */
+  .gradient-border {
+    position: relative;
+  }
+
+  .gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, #a855f7, #e879f9, #7c3aed);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
   }
 }
 
@@ -160,15 +213,17 @@
 
 ::-webkit-scrollbar-thumb {
   @apply bg-navy-lightest rounded-full;
+  background: linear-gradient(180deg, #2d2347, #1a1333);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-slate/50;
+  background: linear-gradient(180deg, #a855f7, #7c3aed);
 }
 
 /* Selection styling */
 ::selection {
-  @apply bg-mint/30 text-slate-lightest;
+  background: rgba(168, 85, 247, 0.3);
+  @apply text-slate-lightest;
 }
 
 /* Animation enhancements */
@@ -194,9 +249,9 @@
 }
 
 :root .nav-link {
-  @apply text-navy hover:text-navy-light;
+  @apply text-navy hover:text-violet;
 }
 
 .dark .nav-link {
-  @apply text-slate hover:text-slate-lightest;
+  @apply text-slate hover:text-violet-light;
 }

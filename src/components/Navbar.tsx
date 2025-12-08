@@ -53,7 +53,7 @@ const Navbar = ({ toggleTheme, isDarkMode }: NavbarProps) => {
       )}
     >
       <div className="container flex items-center justify-between h-16 md:h-20">
-        <a href="#" className="text-2xl font-serif font-bold text-mint">
+        <a href="#" className="text-2xl font-serif font-bold gradient-text">
           JS
         </a>
 
@@ -63,9 +63,9 @@ const Navbar = ({ toggleTheme, isDarkMode }: NavbarProps) => {
             {navItems.map((item, index) => (
               <li key={item.name} className="opacity-0 animate-fade-in" style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'forwards' }}>
                 <a href={item.href} className="nav-link group flex items-center">
-                  <span className="text-mint mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-violet mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <item.icon size={16} />
-                  </span> 
+                  </span>
                   {item.name}
                 </a>
               </li>
@@ -138,10 +138,10 @@ const Navbar = ({ toggleTheme, isDarkMode }: NavbarProps) => {
                 <li key={item.name}>
                   <a
                     href={item.href}
-                    className="text-lg nav-link flex items-center py-2 hover:text-mint transition-colors duration-200"
+                    className="text-lg nav-link flex items-center py-2 hover:text-violet transition-colors duration-200"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    <span className="text-mint mr-3">
+                    <span className="text-violet mr-3">
                       <item.icon size={18} />
                     </span>
                     {item.name}

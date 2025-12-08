@@ -106,10 +106,10 @@ const Skills = () => {
                 key={category.id}
                 variant={activeCategory === category.id ? "default" : "outline"}
                 className={cn(
-                  "rounded-full",
-                  activeCategory === category.id 
-                    ? "bg-mint text-navy hover:bg-mint/90" 
-                    : "border-navy-lightest text-slate hover:text-mint hover:border-mint"
+                  "rounded-full transition-all duration-300",
+                  activeCategory === category.id
+                    ? "bg-gradient-to-r from-violet to-electric text-white border-0 shadow-[0_0_20px_rgba(168,85,247,0.3)]"
+                    : "border-navy-lightest text-slate hover:text-violet hover:border-violet"
                 )}
                 onClick={() => setActiveCategory(category.id)}
               >
@@ -137,26 +137,26 @@ const Skills = () => {
                 }}
               >
                 <div className="flex-1 mb-2 sm:mb-0 flex items-center">
-                  <span className="text-slate-lightest dark:text-slate-lightest text-navy font-medium group-hover:text-mint transition-colors duration-300">
+                  <span className="text-slate-lightest dark:text-slate-lightest text-navy font-medium group-hover:text-violet transition-colors duration-300">
                     {skill.name}
                   </span>
                   {skill.level === 5 && hoveredSkill === skill.name && (
-                    <Sparkles size={14} className="ml-1 text-mint animate-pulse" />
+                    <Sparkles size={14} className="ml-1 text-electric animate-pulse" />
                   )}
                 </div>
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
-                    <div 
-                      key={i} 
+                    <div
+                      key={i}
                       className={cn(
                         "w-2.5 h-2.5 sm:w-2 sm:h-2 rounded-full mx-1 sm:mx-0.5 transition-all duration-300",
-                        i < skill.level 
-                          ? "bg-mint shadow-[0_0_8px_rgba(100,255,218,0.5)]" 
+                        i < skill.level
+                          ? "bg-gradient-to-r from-violet to-electric shadow-[0_0_8px_rgba(168,85,247,0.5)]"
                           : "bg-navy-lightest"
                       )}
                       style={{
-                        transform: hoveredSkill === skill.name && i < skill.level 
-                          ? `scale(${1 + (i * 0.1)})` 
+                        transform: hoveredSkill === skill.name && i < skill.level
+                          ? `scale(${1 + (i * 0.1)})`
                           : 'scale(1)',
                         transitionDelay: `${i * 50}ms`
                       }}
@@ -171,7 +171,7 @@ const Skills = () => {
             <div className="flex justify-center mt-6">
               <Button
                 variant="ghost"
-                className="text-mint hover:bg-mint/10 flex items-center"
+                className="text-violet hover:bg-violet/10 flex items-center"
                 onClick={() => setIsExpanded(!isExpanded)}
               >
                 {isExpanded ? "Show Less" : "Show More"}

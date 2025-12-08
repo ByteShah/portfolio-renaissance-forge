@@ -54,18 +54,28 @@ export default {
           foreground: "hsl(var(--card-foreground))"
         },
         navy: {
-          DEFAULT: "#0a192f",
-          light: "#112240",
-          lightest: "#233554"
+          DEFAULT: "#0f0a1f",
+          light: "#1a1333",
+          lightest: "#2d2347"
         },
         slate: {
-          DEFAULT: "#8892b0",
-          light: "#a8b2d1",
-          lightest: "#ccd6f6"
+          DEFAULT: "#9d8ec2",
+          light: "#b8aad4",
+          lightest: "#e2ddf0"
         },
         mint: {
-          DEFAULT: "#64ffda",
-          tint: "rgba(100, 255, 218, 0.1)"
+          DEFAULT: "#a855f7",
+          tint: "rgba(168, 85, 247, 0.1)"
+        },
+        violet: {
+          DEFAULT: "#a855f7",
+          light: "#c084fc",
+          dark: "#7c3aed",
+          glow: "rgba(168, 85, 247, 0.4)"
+        },
+        electric: {
+          DEFAULT: "#e879f9",
+          light: "#f0abfc"
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

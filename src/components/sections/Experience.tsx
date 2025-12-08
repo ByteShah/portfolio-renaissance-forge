@@ -87,9 +87,9 @@ const Experience = () => {
                 key={index}
                 variant="ghost"
                 className={cn(
-                  "justify-start rounded-none px-4 py-3 text-left whitespace-nowrap",
+                  "justify-start rounded-none px-4 py-3 text-left whitespace-nowrap transition-all duration-300",
                   activeTab === index
-                    ? "text-mint border-b-2 md:border-b-0 md:border-l-2 border-mint bg-mint/5 font-medium"
+                    ? "text-violet border-b-2 md:border-b-0 md:border-l-2 border-violet bg-violet/10 font-medium"
                     : "text-slate border-b-2 md:border-b-0 md:border-l-2 border-transparent hover:bg-navy-light hover:text-slate-lightest"
                 )}
                 onClick={() => setActiveTab(index)}
@@ -112,16 +112,16 @@ const Experience = () => {
                 <div>
                   <h3 className="text-xl text-slate-lightest font-bold">
                     {experience.title}{" "}
-                    <span className="text-mint">@ {experience.company}</span>
+                    <span className="gradient-text">@ {experience.company}</span>
                   </h3>
                   <p className="text-slate">{experience.date}</p>
                   <p className="text-slate">{experience.location}</p>
                 </div>
-                
+
                 <ul className="space-y-3">
                   {experience.description.map((point, i) => (
                     <li key={i} className="flex items-start">
-                      <ChevronRight size={18} className="text-mint mt-1 mr-2 shrink-0" />
+                      <ChevronRight size={18} className="text-violet mt-1 mr-2 shrink-0" />
                       <span className="text-slate-light">{point}</span>
                     </li>
                   ))}

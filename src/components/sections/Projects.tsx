@@ -161,10 +161,10 @@ const Projects = () => {
               key={category.id}
               variant={filter === category.id ? "default" : "outline"}
               className={cn(
-                "rounded-full",
-                filter === category.id 
-                  ? "bg-mint text-navy hover:bg-mint/90" 
-                  : "border-navy-lightest text-slate hover:text-mint hover:border-mint"
+                "rounded-full transition-all duration-300",
+                filter === category.id
+                  ? "bg-gradient-to-r from-violet to-electric text-white border-0 shadow-[0_0_20px_rgba(168,85,247,0.3)]"
+                  : "border-navy-lightest text-slate hover:text-violet hover:border-violet"
               )}
               onClick={() => setFilter(category.id)}
             >
@@ -188,8 +188,8 @@ const Projects = () => {
                   "lg:col-span-7",
                   index % 2 === 1 ? "lg:order-2" : "lg:order-1"
                 )}>
-                  <div className="relative group aspect-video overflow-hidden rounded-lg">
-                    <div className="absolute inset-0 bg-mint/10 group-hover:bg-transparent transition-all duration-300"></div>
+                  <div className="relative group aspect-video overflow-hidden rounded-xl">
+                    <div className="absolute inset-0 bg-violet/10 group-hover:bg-transparent transition-all duration-300"></div>
                     {project.image ? (
                       <>
                         <img 
@@ -197,16 +197,16 @@ const Projects = () => {
                           alt={project.title} 
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                           <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                            <h4 className="text-mint font-bold text-xl mb-2">{project.title}</h4>
+                            <h4 className="gradient-text font-bold text-xl mb-2">{project.title}</h4>
                             <p className="text-slate-light text-sm line-clamp-2">{project.description}</p>
                           </div>
                         </div>
                       </>
                     ) : (
-                      <div className="w-full h-full bg-navy flex items-center justify-center text-slate border border-navy-lightest group-hover:border-mint/50 transition-all duration-300">
-                        <FolderOpen size={48} className="text-mint opacity-20" />
+                      <div className="w-full h-full bg-navy flex items-center justify-center text-slate border border-navy-lightest group-hover:border-violet/50 transition-all duration-300">
+                        <FolderOpen size={48} className="text-violet opacity-20" />
                       </div>
                     )}
                   </div>
@@ -217,10 +217,10 @@ const Projects = () => {
                   index % 2 === 1 ? "lg:order-1 lg:text-right" : "lg:order-2"
                 )}>
                   <div className="space-y-4">
-                    <p className="text-mint text-sm">Featured Project</p>
+                    <p className="text-violet text-sm font-medium">Featured Project</p>
                     <h3 className="text-2xl font-bold text-slate-lightest">{project.title}</h3>
-                    
-                    <div className="p-6 bg-navy rounded-lg shadow-xl">
+
+                    <div className="p-6 rounded-xl glass-card">
                       <p className="text-slate-light">{project.description}</p>
                     </div>
                     
@@ -240,21 +240,21 @@ const Projects = () => {
                       index % 2 === 1 ? "justify-end" : ""
                     )}>
                       {project.github && (
-                        <a 
-                          href={project.github} 
-                          target="_blank" 
+                        <a
+                          href={project.github}
+                          target="_blank"
                           rel="noopener noreferrer"
-                          className="text-slate hover:text-mint transition-colors"
+                          className="text-slate hover:text-violet transition-colors"
                         >
                           <Github size={20} />
                         </a>
                       )}
                       {project.demo && (
-                        <a 
-                          href={project.demo} 
-                          target="_blank" 
+                        <a
+                          href={project.demo}
+                          target="_blank"
                           rel="noopener noreferrer"
-                          className="text-slate hover:text-mint transition-colors"
+                          className="text-slate hover:text-violet transition-colors"
                         >
                           <ExternalLink size={20} />
                         </a>
@@ -271,42 +271,42 @@ const Projects = () => {
         <h3 className="text-xl font-bold text-slate-lightest mb-8 text-center">Other Noteworthy Projects</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {otherProjects.map((project) => (
-            <div key={project.title} className="project-card h-full p-6 group hover:bg-navy-light transition-colors duration-300 rounded-lg">
+            <div key={project.title} className="project-card h-full p-6 group transition-all duration-300 rounded-xl">
               <div className="flex justify-between items-start mb-6">
                 <div className="relative">
-                  <div className="absolute -inset-1 bg-mint/20 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <FolderOpen size={40} className="text-mint relative z-10 transform group-hover:scale-110 transition-transform duration-300" />
+                  <div className="absolute -inset-1 bg-violet/20 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <FolderOpen size={40} className="text-violet relative z-10 transform group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <div className="flex gap-4">
                   {project.github && (
-                    <a 
-                      href={project.github} 
-                      target="_blank" 
+                    <a
+                      href={project.github}
+                      target="_blank"
                       rel="noopener noreferrer"
-                      className="text-slate hover:text-mint transition-colors transform hover:-translate-y-1"
+                      className="text-slate hover:text-violet transition-colors transform hover:-translate-y-1"
                     >
                       <Github size={20} />
                     </a>
                   )}
                   {project.demo && (
-                    <a 
-                      href={project.demo} 
-                      target="_blank" 
+                    <a
+                      href={project.demo}
+                      target="_blank"
                       rel="noopener noreferrer"
-                      className="text-slate hover:text-mint transition-colors transform hover:-translate-y-1"
+                      className="text-slate hover:text-violet transition-colors transform hover:-translate-y-1"
                     >
                       <ExternalLink size={20} />
                     </a>
                   )}
                 </div>
               </div>
-              
-              <h3 className="text-xl font-bold text-slate-lightest mb-3 group-hover:text-mint transition-colors duration-300">{project.title}</h3>
+
+              <h3 className="text-xl font-bold text-slate-lightest mb-3 group-hover:text-violet transition-colors duration-300">{project.title}</h3>
               <p className="text-slate-light mb-4 flex-grow">{project.description}</p>
-              
+
               <div className="flex flex-wrap gap-2 mt-auto pt-4">
                 {project.tags.map((tag) => (
-                  <span key={tag} className="text-slate text-xs bg-navy-light px-2 py-1 rounded-full">
+                  <span key={tag} className="text-slate text-xs bg-navy-lightest/50 px-3 py-1 rounded-full border border-violet/10">
                     {tag}
                   </span>
                 ))}
