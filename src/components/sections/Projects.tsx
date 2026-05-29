@@ -1,365 +1,175 @@
-import { useState } from "react";
-import { ExternalLink, Github, FolderOpen } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useState, useRef } from "react";
+import { ExternalLink, Github, FolderOpen, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useGSAP } from "@gsap/react";
+import { gsap } from "@/lib/gsap";
+import { motion } from "framer-motion";
 
-interface Project {
-  title: string;
-  description: string;
-  tags: string[];
-  image?: string;
-  github?: string;
-  demo?: string;
-  featured: boolean;
-  category: string[];
-}
+interface Project { title: string; description: string; tags: string[]; image?: string; github?: string; demo?: string; featured: boolean; category: string[]; }
+
+const projects: Project[] = [
+  { title: "Textile Wholesale ERP & B2B Commerce", description: "17-module Odoo ERP with B2B e-commerce, inventory, pricing, agent commissions, barcode tablet sales, watermarked catalogs, and batch payout systems.", tags: ["Odoo", "Python", "B2B", "ERP", "OWL"], image: "/textile.jpg", featured: true, category: ["odoo", "web"] },
+  { title: "Email Intelligence SaaS Platform", description: "LLM-powered Gmail pipeline classifying emails into life events. Multi-tier AI scanning, Vercel AI Gateway, AES-256-GCM OAuth storage, full SaaS monetization.", tags: ["Next.js", "LLM", "Supabase", "AI Gateway", "SaaS"], image: "/email.jpg", featured: true, category: ["ai", "web"] },
+  { title: "Line of Credit Platform", description: "Full lending lifecycle with Plaid bank verification, Stripe disbursements/repayments, multi-location credit rules, automated statements, and interest calculations.", tags: ["Odoo", "Plaid", "Stripe", "Accounting"], image: "/ecomm.jpg", featured: true, category: ["odoo", "web"] },
+  { title: "Custom OCR Engine for Odoo", description: "Automated invoice/bill processing with intelligent field matching, confidence scoring, configurable mapping rules, and human-in-the-loop review workflow.", tags: ["Odoo", "OCR", "Python", "AI"], image: "/chat.jpg", featured: true, category: ["odoo", "ai"] },
+  { title: "OHIP Insurance Platform", description: "OHIP API real-time verification, MCEDT/WSDL integration for payment reconciliation, automated XML/EDI batch claim generation with rule-based validations.", tags: ["Odoo", "OHIP API", "XML/EDI"], image: "/insurance.jpg", featured: true, category: ["odoo"] },
+  { title: "Conversational AI Agent for Odoo", description: "Natural language interface for Odoo databases with ORM-safe query execution, role-based access validation, and prompt injection safeguards.", tags: ["Odoo", "LLM", "NLP", "Python"], featured: false, category: ["odoo", "ai"] },
+  { title: "AI Meeting Intelligence Assistant", description: "Meeting recording pipeline with AI summarization, mind-map generation, conversational Q&A over transcripts, and searchable knowledge base.", tags: ["LLM", "Audio", "RAG", "AI"], featured: false, category: ["ai", "web"] },
+  { title: "AI Real-Time Screen Assistant", description: "Live screen analysis via Gemini Vision with voice interaction, session memory, and low-latency streaming for Copilot-style guidance.", tags: ["Gemini Vision", "Voice AI", "Streaming"], featured: false, category: ["ai"] },
+  { title: "SaaSKit Automation Framework", description: "DigitalOcean droplet provisioning, Docker container lifecycle, Telegram bot monitoring, multi-instance onboarding with environment isolation.", tags: ["DigitalOcean", "Docker", "Telegram", "DevOps"], featured: false, category: ["web"] },
+  { title: "Sales Forecasting Dashboard", description: "Python + OWL time-series dashboard boosting inventory planning accuracy by 45%, integrated with Odoo Sales and Inventory modules.", tags: ["Python", "OWL", "Analytics"], featured: false, category: ["odoo", "ai"] },
+  { title: "Stock Market Prediction Models", description: "Hybrid ML models (LSTM, CNN, ARIMA) with sentiment analysis achieving 92% accuracy on Nifty50. Published in Elsevier journal.", tags: ["TensorFlow", "LSTM", "Research"], demo: "https://doi.org/10.1016/j.iswa.2022.200111", featured: false, category: ["research", "ai"] },
+  { title: "EMG-Controlled Bionic Arm", description: "95% gesture recognition accuracy using noise-filtered EMG signals and CNN. Thesis project on bionic arm control via machine learning.", tags: ["CNN", "Signal Processing", "Embedded"], featured: false, category: ["research", "ai"] },
+  { title: "Odoo MCP Integration", description: "Claude MCP integration for real-time Odoo database interaction with retry queues, conflict handling, and async processing pipelines.", tags: ["Odoo", "Claude MCP", "Python"], featured: false, category: ["odoo", "ai"] },
+  { title: "Odoo v14 to v19 Migration", description: "Multi-module migration covering accounting, helpdesk, ecommerce workflows with modernized OWL components and deprecated API replacements.", tags: ["Odoo", "Migration", "OWL"], featured: false, category: ["odoo"] },
+];
+
+const categories = [
+  { id: "all", name: "All" }, { id: "odoo", name: "Odoo" }, { id: "ai", name: "AI/ML" },
+  { id: "research", name: "Research" }, { id: "web", name: "Web" },
+];
 
 const Projects = () => {
   const [filter, setFilter] = useState("all");
+  const sectionRef = useRef<HTMLElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  const categories = [
-    { id: "all", name: "All Projects" },
-    { id: "odoo", name: "Odoo" },
-    { id: "ai", name: "AI/ML" },
-    { id: "research", name: "Research" },
-    { id: "web", name: "Web Development" },
-  ];
+  const filtered = filter === "all" ? projects : projects.filter(p => p.category.includes(filter));
+  const featured = filtered.filter(p => p.featured);
+  const others = filtered.filter(p => !p.featured);
 
-  const projects: Project[] = [
-    {
-      title: "Textile Wholesale ERP & B2B Commerce System",
-      description: "Built and deployed a production-grade textile ERP system with 17 custom Odoo modules across B2B e-commerce, inventory, order-taking, pricing, agent commissions, analytics, and payments. Implemented customer approval gating, customer-type-based pricing, product visibility rules, watermarked catalog images, textile combo/set builders, CSV inventory imports, barcode-enabled tablet sales flows, inventory transfers, batch commission payouts, license enforcement, small-bill tracking, and editable storefront/homepage management.",
-      tags: ["Odoo", "Python", "B2B eCommerce", "ERP", "OWL", "PostgreSQL"],
-      image: "/textile.jpg",
-      github: "",
-      demo: "",
-      featured: true,
-      category: ["odoo", "web"],
-    },
-    {
-      title: "Line of Credit (LoC) System",
-      description: "Designed full Line of Credit platform with Plaid bank verification and Stripe payment workflows. Implemented credit disbursement, automated repayments, payout scheduling, multi-location LOC profiles, and complete statement generation engine with interest & fee calculations.",
-      tags: ["Odoo", "Plaid", "Stripe", "Accounting", "API Integration"],
-      image: "/ecomm.jpg",
-      github: "",
-      demo: "",
-      featured: true,
-      category: ["odoo", "web"],
-    },
-    {
-      title: "Custom OCR System for Odoo",
-      description: "Built complete OCR automation engine for vendor bills and customer invoices. Implemented intelligent matching logic for products, taxes, vendors with confidence scoring. Added review workflow for low-confidence data validation.",
-      tags: ["Odoo", "OCR", "Python", "Automation", "AI"],
-      image: "/chat.jpg",
-      github: "",
-      demo: "",
-      featured: true,
-      category: ["odoo", "ai"],
-    },
-    {
-      title: "OHIP Insurance Platform",
-      description: "Integrated OHIP API for real-time insurance verification and claim processing. Built MCEDT (WSDL) integration for payment reconciliation. Automated XML/EDI batch claim generation with rule-based validations and pre-diagnosis approval workflow.",
-      tags: ["Odoo", "OHIP API", "WSDL", "XML/EDI", "Accounting"],
-      image: "/insurance.jpg",
-      github: "",
-      demo: "",
-      featured: true,
-      category: ["odoo"],
-    },
-    {
-      title: "Conversational AI Agent for Odoo ERP",
-      description: "AI assistant for Odoo databases using natural language queries. Built a natural language interpreter converting queries into ORM-safe operations, implemented role-based access validation aligned with Odoo security rules, enabled AI-driven report generation and workflow automation triggers, and added safeguards against prompt injection and unsafe database execution.",
-      tags: ["Odoo", "LLM", "Python", "ORM Security", "NLP", "AI"],
-      github: "",
-      demo: "",
-      featured: false,
-      category: ["odoo", "ai"],
-    },
-    {
-      title: "AI Meeting Intelligence & Knowledge Assistant",
-      description: "AI meeting assistant to convert discussions into structured and searchable knowledge. Developed recording pipeline with optimized single-channel audio compression, AI summarization for summaries/TODOs/insights, automated mind-map generation from conversation topics, conversational Q&A over transcripts using retrieval-based architecture, and a searchable meeting knowledge base.",
-      tags: ["LLM", "Audio Processing", "RAG", "Mind Mapping", "AI", "Vector Search"],
-      github: "",
-      demo: "",
-      featured: false,
-      category: ["ai", "web"],
-    },
-    {
-      title: "AI-Powered Real-Time Screen Assistant",
-      description: "Real-time AI assistant for screen understanding and contextual voice interaction. Integrated Gemini Vision APIs for live screen analysis, built voice pipeline with speech-to-text and text-to-speech orchestration, implemented session-based memory for task continuity, and designed low-latency streaming for real-time Siri/Copilot-style workflow guidance.",
-      tags: ["Gemini Vision", "Voice AI", "STT/TTS", "Streaming", "Python"],
-      github: "",
-      demo: "",
-      featured: false,
-      category: ["ai"],
-    },
-    {
-      title: "SaaSKit Automation Framework for OpenClaw",
-      description: "Automated SaaS deployment toolkit for OpenClaw infrastructure provisioning. Automated droplet provisioning via DigitalOcean APIs, built container lifecycle automation for image deployment and updates, integrated Telegram bot for remote deployment monitoring and environment control, and designed multi-instance onboarding workflows with environment isolation to reduce manual deployment effort.",
-      tags: ["DigitalOcean", "Docker", "Telegram Bot", "Infrastructure-as-Code", "DevOps"],
-      github: "",
-      demo: "",
-      featured: false,
-      category: ["web"],
-    },
-    {
-      title: "Sales Forecasting Dashboard",
-      description: "Built Sales Forecasting Dashboard (Python + OWL) with time-series analysis, boosting inventory planning accuracy by 45%. Integrated with Odoo Sales and Inventory modules for real-time data visualization.",
-      tags: ["Python", "OWL", "Time-Series Analysis", "Data Visualization"],
-      github: "",
-      demo: "",
-      featured: false,
-      category: ["odoo", "ai"],
-    },
-    {
-      title: "Stock Market Prediction Models",
-      description: "Analyzed hybrid ML models (LSTM, CNN, ARIMA) with sentiment analysis, achieving 92% prediction accuracy on Nifty50 data. Published in Elsevier journal (DOI: 10.1016/j.iswa.2022.200111).",
-      tags: ["TensorFlow", "LSTM", "CNN", "ARIMA", "Research"],
-      github: "",
-      demo: "https://doi.org/10.1016/j.iswa.2022.200111",
-      featured: false,
-      category: ["research", "ai"],
-    },
-    {
-      title: "EMG-Controlled Bionic Arm",
-      description: "Achieved 95% gesture recognition accuracy using noise-filtered EMG signals and CNN. Thesis project focused on evaluating and identifying gestures for an EMG-controlled bionic arm using machine learning algorithms.",
-      tags: ["TensorFlow", "Signal Processing", "CNN", "Embedded Systems"],
-      github: "",
-      demo: "",
-      featured: false,
-      category: ["research", "ai"],
-    },
-    {
-      title: "OWL Analytics Dashboard",
-      description: "Designed dynamic sales/contact comparison tools using OWL JavaScript framework and ChartJS, improving client reporting efficiency by 50%. Created custom model visualization and comparison features.",
-      tags: ["OWL", "Chart.js", "Odoo", "Analytics"],
-      github: "",
-      demo: "",
-      featured: false,
-      category: ["odoo", "web"],
-    },
-    {
-      title: "AI Library Management System",
-      description: "Integrated Google Books API + web scraping (BeautifulSoup) to auto-populate 10K+ book records. Built React dashboard with JWT auth, reducing manual data entry by 80%. Hackathon Finalist project.",
-      tags: ["React", "Docker", "JWT", "BeautifulSoup", "API Integration"],
-      github: "",
-      demo: "",
-      featured: false,
-      category: ["web", "ai"],
-    },
-    {
-      title: "Odoo MCP Integration",
-      description: "Integrated Odoo with Claude MCP (Model Context Protocol) for real-time database interaction. Designed syncing pipelines for products, customers, orders, and inventory with retry queues, conflict handling, and async processing.",
-      tags: ["Odoo", "Claude MCP", "API", "Python", "Automation"],
-      github: "",
-      demo: "",
-      featured: false,
-      category: ["odoo", "ai"],
-    },
-    {
-      title: "Odoo v14 to v19 Migration",
-      description: "Migrated multiple custom modules involving accounting, helpdesk, ecommerce, and project workflows. Updated models, rewritten business logic, modernized OWL components and replaced deprecated APIs.",
-      tags: ["Odoo", "Migration", "Python", "OWL", "PostgreSQL"],
-      github: "",
-      demo: "",
-      featured: false,
-      category: ["odoo"],
-    },
-    {
-      title: "Helpdesk Team Management System",
-      description: "Built multi-team helpdesk structure with role-based visibility and controlled access. Implemented automatic ticket assignment based on workload, expertise, and team capacity with consistent routing.",
-      tags: ["Odoo", "Helpdesk", "Automation", "Python"],
-      github: "",
-      demo: "",
-      featured: false,
-      category: ["odoo"],
-    },
-    {
-      title: "eCommerce Order Approval Engine",
-      description: "Developed multi-stage portal order approval workflow with manager validations and real-time notifications. Implemented credit control checks with dynamic feedback and editable portal orders.",
-      tags: ["Odoo", "eCommerce", "Workflow", "Python", "OWL"],
-      github: "",
-      demo: "",
-      featured: false,
-      category: ["odoo", "web"],
-    },
-  ];
+  useGSAP(() => {
+    const timer = setTimeout(() => {
+      gsap.fromTo(".other-project-card",
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, stagger: 0.07, duration: 0.7, ease: "power3.out", scrollTrigger: { trigger: ".other-projects-grid", start: "top 82%" } }
+      );
+    }, 60);
+    return () => clearTimeout(timer);
+  }, { dependencies: [filter], scope: sectionRef });
 
-  const filteredProjects = filter === "all" 
-    ? projects 
-    : projects.filter(project => project.category.includes(filter));
-
-  const featuredProjects = filteredProjects.filter(project => project.featured);
-  const otherProjects = filteredProjects.filter(project => !project.featured);
+  const cardBorder = { border: "1px solid var(--border-color)", borderRadius: "1rem" };
 
   return (
-    <section id="projects" className="section-padding bg-navy-light">
+    <section id="projects" ref={sectionRef} className="section-padding" style={{ background: "var(--bg)" }}>
       <div className="container mx-auto">
         <div className="numbered-heading mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold">
-            Projects
-          </h2>
+          <h2 className="text-2xl md:text-3xl font-bold" style={{ color: "var(--text-primary)" }}>Projects</h2>
         </div>
-        
-        <div className="flex flex-wrap gap-3 justify-center mb-12">
-          {categories.map((category) => (
-            <Button
-              key={category.id}
-              variant={filter === category.id ? "default" : "outline"}
-              className={cn(
-                "rounded-full transition-all duration-300",
-                filter === category.id
-                  ? "bg-gradient-to-r from-violet to-electric text-white border-0 shadow-[0_0_20px_rgba(168,85,247,0.3)]"
-                  : "border-navy-lightest text-slate hover:text-violet hover:border-violet"
-              )}
-              onClick={() => setFilter(category.id)}
+
+        {/* Filters */}
+        <div className="flex flex-wrap gap-2 justify-center mb-12">
+          {categories.map(cat => (
+            <button key={cat.id} onClick={() => setFilter(cat.id)}
+              className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-200"
+              style={filter === cat.id
+                ? { background: "var(--accent)", color: "#F2EDE4" }
+                : { background: "var(--surface)", color: "var(--text-secondary)", border: "1px solid var(--border-color)" }}
             >
-              {category.name}
-            </Button>
+              {cat.name}
+            </button>
           ))}
         </div>
-        
-        {/* Featured Projects */}
-        {featuredProjects.length > 0 && (
-          <div className="space-y-20 mb-20">
-            {featuredProjects.map((project, index) => (
-              <div 
-                key={project.title} 
-                className={cn(
-                  "grid grid-cols-1 lg:grid-cols-12 gap-6 items-center",
-                  index % 2 === 1 ? "lg:flex-row-reverse" : ""
-                )}
-              >
-                <div className={cn(
-                  "lg:col-span-7",
-                  index % 2 === 1 ? "lg:order-2" : "lg:order-1"
-                )}>
-                  <div className="relative group aspect-video overflow-hidden rounded-xl">
+
+        {/* Horizontal scroll — featured */}
+        {featured.length > 0 && (
+          <div className="mb-20">
+            <p className="text-xs font-semibold tracking-widest uppercase mb-6 gradient-text">Featured Work</p>
+            <div
+              ref={scrollRef}
+              className="flex gap-5 overflow-x-auto pb-4"
+              style={{ scrollSnapType: "x mandatory", scrollbarWidth: "none", msOverflowStyle: "none", cursor: "grab" }}
+              onMouseDown={(e) => {
+                const el = e.currentTarget;
+                el.style.cursor = "grabbing";
+                const startX = e.pageX - el.offsetLeft;
+                const scrollLeft = el.scrollLeft;
+                const onMove = (ev: MouseEvent) => { el.scrollLeft = scrollLeft - (ev.pageX - el.offsetLeft - startX); };
+                const onUp = () => { el.style.cursor = "grab"; window.removeEventListener("mousemove", onMove); window.removeEventListener("mouseup", onUp); };
+                window.addEventListener("mousemove", onMove);
+                window.addEventListener("mouseup", onUp);
+              }}
+            >
+              {featured.map((project) => (
+                <motion.div
+                  key={project.title}
+                  className="shrink-0 overflow-hidden group"
+                  style={{ width: "340px", scrollSnapAlign: "start", ...cardBorder, background: "var(--surface)" }}
+                  whileHover={{ y: -4 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  {/* Image */}
+                  <div className="relative h-48 overflow-hidden">
                     {project.image ? (
-                      <>
-                        <img
-                          src={project.image}
-                          alt={project.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-br from-violet/75 via-blue-900/60 to-electric/65 mix-blend-multiply transition-opacity duration-300 group-hover:opacity-70" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                          <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                            <h4 className="gradient-text font-bold text-xl mb-2">{project.title}</h4>
-                            <p className="text-slate-light text-sm line-clamp-2">{project.description}</p>
-                          </div>
-                        </div>
-                      </>
+                      <img src={project.image} alt={project.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     ) : (
-                      <div className="w-full h-full bg-navy flex items-center justify-center text-slate border border-navy-lightest group-hover:border-violet/50 transition-all duration-300">
-                        <FolderOpen size={48} className="text-violet opacity-20" />
+                      <div className="w-full h-full flex items-center justify-center" style={{ background: "var(--surface-2)" }}>
+                        <FolderOpen size={40} style={{ color: "var(--accent)", opacity: 0.4 }} />
                       </div>
                     )}
+                    {/* Tint on image */}
+                    {project.image && (
+                      <div className="absolute inset-0 mix-blend-multiply transition-opacity duration-300 group-hover:opacity-60"
+                        style={{ background: "linear-gradient(135deg, rgba(74,94,58,0.4), rgba(46,59,37,0.3))" }} />
+                    )}
                   </div>
-                </div>
-                
-                <div className={cn(
-                  "lg:col-span-5",
-                  index % 2 === 1 ? "lg:order-1 lg:text-right" : "lg:order-2"
-                )}>
-                  <div className="space-y-4">
-                    <p className="text-violet text-sm font-medium">Featured Project</p>
-                    <h3 className="text-2xl font-bold text-slate-lightest">{project.title}</h3>
-
-                    <div className="p-6 rounded-xl glass-card">
-                      <p className="text-slate-light">{project.description}</p>
-                    </div>
-                    
-                    <div className={cn(
-                      "flex flex-wrap gap-3",
-                      index % 2 === 1 ? "justify-end" : ""
-                    )}>
-                      {project.tags.map((tag) => (
-                        <span key={tag} className="text-slate text-sm">
+                  {/* Content */}
+                  <div className="p-5">
+                    <h3 className="font-bold text-base mb-2 leading-tight" style={{ color: "var(--text-primary)" }}>{project.title}</h3>
+                    <p className="text-sm leading-relaxed mb-4 line-clamp-3" style={{ color: "var(--text-secondary)" }}>{project.description}</p>
+                    <div className="flex flex-wrap gap-1.5 mb-4">
+                      {project.tags.slice(0, 4).map(tag => (
+                        <span key={tag} className="text-xs px-2.5 py-0.5 rounded-full"
+                          style={{ background: "var(--bg)", color: "var(--text-muted)", border: "1px solid var(--border-color)" }}>
                           {tag}
                         </span>
                       ))}
                     </div>
-                    
-                    <div className={cn(
-                      "flex gap-4",
-                      index % 2 === 1 ? "justify-end" : ""
-                    )}>
-                      {project.github && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-slate hover:text-violet transition-colors"
-                        >
-                          <Github size={20} />
-                        </a>
-                      )}
-                      {project.demo && (
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-slate hover:text-violet transition-colors"
-                        >
-                          <ExternalLink size={20} />
-                        </a>
-                      )}
+                    <div className="flex items-center gap-3">
+                      {project.github && <a href={project.github} target="_blank" rel="noopener noreferrer" style={{ color: "var(--text-muted)" }} className="hover:text-[var(--accent)] transition-colors"><Github size={16} /></a>}
+                      {project.demo && <a href={project.demo} target="_blank" rel="noopener noreferrer" style={{ color: "var(--text-muted)" }} className="hover:text-[var(--accent)] transition-colors"><ExternalLink size={16} /></a>}
                     </div>
                   </div>
-                </div>
-              </div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
+            <p className="text-xs mt-3 flex items-center gap-1" style={{ color: "var(--text-muted)" }}>
+              <span>←</span> drag to scroll <span>→</span>
+            </p>
           </div>
         )}
-        
-        {/* Other Projects */}
-        <h3 className="text-xl font-bold text-slate-lightest mb-8 text-center">Other Noteworthy Projects</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {otherProjects.map((project) => (
-            <div key={project.title} className="project-card h-full p-6 group transition-all duration-300 rounded-xl">
-              <div className="flex justify-between items-start mb-6">
-                <div className="relative">
-                  <div className="absolute -inset-1 bg-violet/20 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <FolderOpen size={40} className="text-violet relative z-10 transform group-hover:scale-110 transition-transform duration-300" />
-                </div>
-                <div className="flex gap-4">
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-slate hover:text-violet transition-colors transform hover:-translate-y-1"
-                    >
-                      <Github size={20} />
-                    </a>
-                  )}
-                  {project.demo && (
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-slate hover:text-violet transition-colors transform hover:-translate-y-1"
-                    >
-                      <ExternalLink size={20} />
-                    </a>
-                  )}
-                </div>
-              </div>
 
-              <h3 className="text-xl font-bold text-slate-lightest mb-3 group-hover:text-violet transition-colors duration-300">{project.title}</h3>
-              <p className="text-slate-light mb-4 flex-grow">{project.description}</p>
-
-              <div className="flex flex-wrap gap-2 mt-auto pt-4">
-                {project.tags.map((tag) => (
-                  <span key={tag} className="text-slate text-xs bg-navy-lightest/50 px-3 py-1 rounded-full border border-violet/10">
-                    {tag}
-                  </span>
-                ))}
-              </div>
+        {/* Other projects grid */}
+        {others.length > 0 && (
+          <>
+            <h3 className="text-lg font-bold mb-8" style={{ color: "var(--text-primary)" }}>Other Noteworthy Projects</h3>
+            <div className="other-projects-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {others.map(project => (
+                <div key={project.title} className="other-project-card project-card p-5 flex flex-col group h-full">
+                  <div className="flex justify-between items-start mb-4">
+                    <FolderOpen size={32} style={{ color: "var(--accent)", opacity: 0.7 }} className="group-hover:opacity-100 transition-opacity" />
+                    <div className="flex gap-3">
+                      {project.github && <a href={project.github} target="_blank" rel="noopener noreferrer" style={{ color: "var(--text-muted)" }} className="hover:text-[var(--accent)] transition-colors"><Github size={16} /></a>}
+                      {project.demo && <a href={project.demo} target="_blank" rel="noopener noreferrer" style={{ color: "var(--text-muted)" }} className="hover:text-[var(--accent)] transition-colors"><ExternalLink size={16} /></a>}
+                    </div>
+                  </div>
+                  <h3 className="font-bold text-base mb-2 flex-shrink-0 transition-colors duration-200 group-hover:text-[var(--accent)]"
+                    style={{ color: "var(--text-primary)" }}>{project.title}</h3>
+                  <p className="text-sm leading-relaxed flex-1 mb-4" style={{ color: "var(--text-secondary)" }}>{project.description}</p>
+                  <div className="flex flex-wrap gap-1.5 mt-auto">
+                    {project.tags.map(tag => (
+                      <span key={tag} className="text-xs px-2.5 py-0.5 rounded-full"
+                        style={{ background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border-color)" }}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        )}
       </div>
     </section>
   );

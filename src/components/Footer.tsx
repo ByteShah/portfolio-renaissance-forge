@@ -1,62 +1,80 @@
-
-import { Github, Linkedin, Twitter, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, Copy, Check } from "lucide-react";
+import { useCopyEmail } from "@/hooks/useCopyEmail";
 
 const Footer = () => {
   const year = new Date().getFullYear();
-
+  const { copied: emailCopied, copy: copyEmail } = useCopyEmail("s1.jaimin@gmail.com");
   const socialLinks = [
     { icon: Github, href: "https://github.com/ByteShah", label: "GitHub" },
     { icon: Linkedin, href: "https://linkedin.com/in/jaiminshah198", label: "LinkedIn" },
-    // { icon: Twitter, href: "https://twitter.com/jaiminshah", label: "Twitter" },
     { icon: Mail, href: "mailto:s1.jaimin@gmail.com", label: "Email" },
   ];
 
   return (
-    <footer className="bg-navy py-10 border-t border-violet/10">
+    <footer className="py-10 border-t" style={{ background: "var(--surface)", borderColor: "var(--border-color)" }}>
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
-            <div className="gradient-text text-3xl font-serif mb-2">Jaimin Shah</div>
-            <p className="text-slate-light">Senior Odoo Developer & AI Specialist</p>
+            <div className="gradient-text text-2xl font-bold mb-1">Jaimin Shah</div>
+            <p className="text-sm" style={{ color: "var(--text-secondary)" }}>AI Product Engineer & Senior Odoo Developer</p>
           </div>
-
           <div className="grid grid-cols-2 gap-x-16 gap-y-3 mb-8 md:mb-0">
             <div>
-              <h3 className="text-slate-lightest font-medium mb-3">Explore</h3>
+              <h3 className="font-semibold mb-3 text-sm" style={{ color: "var(--text-primary)" }}>Explore</h3>
               <ul className="space-y-2">
-                <li><a href="#about" className="text-slate hover:text-violet transition-colors">About</a></li>
-                <li><a href="#skills" className="text-slate hover:text-violet transition-colors">Skills</a></li>
-                <li><a href="#projects" className="text-slate hover:text-violet transition-colors">Projects</a></li>
+                {["About", "Skills", "Projects"].map(l => (
+                  <li key={l}><a href={`#${l.toLowerCase()}`} className="text-sm transition-colors hover:text-[var(--accent)]" style={{ color: "var(--text-secondary)" }}>{l}</a></li>
+                ))}
               </ul>
             </div>
             <div>
-              <h3 className="text-slate-lightest font-medium mb-3">Connect</h3>
+              <h3 className="font-semibold mb-3 text-sm" style={{ color: "var(--text-primary)" }}>Connect</h3>
               <ul className="space-y-2">
-                <li><a href="#experience" className="text-slate hover:text-violet transition-colors">Experience</a></li>
-                <li><a href="#contact" className="text-slate hover:text-violet transition-colors">Contact</a></li>
-                {/* <li><a href="/resume.pdf" className="text-slate hover:text-violet transition-colors">Resume</a></li> */}
+                {["Experience", "Contact", "Book a Call"].map(l => (
+                  <li key={l}>
+                    <a
+                      href={l === "Book a Call" ? "https://cal.com/jaimin-shah" : `#${l.toLowerCase()}`}
+                      target={l === "Book a Call" ? "_blank" : undefined}
+                      rel={l === "Book a Call" ? "noopener noreferrer" : undefined}
+                      className="text-sm transition-colors hover:text-[var(--accent)]"
+                      style={{ color: "var(--text-secondary)" }}
+                    >
+                      {l}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
         </div>
-
-        <div className="border-t border-violet/10 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <div className="text-sm text-slate mb-4 md:mb-0">
-            <p>© {year} Jaimin Shah. All Rights Reserved</p>
-          </div>
-
-          <div className="flex space-x-6">
-            {socialLinks.map((link, index) => (
-              <a
-                key={index}
-                href={link.href}
-                aria-label={link.label}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-slate hover:text-violet transform hover:-translate-y-1 transition-all duration-200"
-              >
-                <link.icon size={20} />
-              </a>
+        <div className="border-t mt-8 pt-8 flex flex-col md:flex-row justify-between items-center" style={{ borderColor: "var(--border-color)" }}>
+          <p className="text-sm mb-4 md:mb-0" style={{ color: "var(--text-muted)" }}>© {year} Jaimin Shah. All Rights Reserved</p>
+          <div className="flex items-center space-x-5">
+            {socialLinks.map((link) => (
+              link.label === "Email" ? (
+                <button key={link.label} aria-label="Copy email"
+                  onClick={copyEmail}
+                  className="relative transition-all duration-200 hover:-translate-y-0.5"
+                  style={{ color: emailCopied ? "var(--accent)" : "var(--text-secondary)" }}
+                >
+                  {emailCopied ? <Check size={18} /> : <Mail size={18} />}
+                  {emailCopied && (
+                    <span className="absolute -top-7 left-1/2 -translate-x-1/2 text-xs font-medium px-2 py-0.5 rounded-full whitespace-nowrap"
+                      style={{ background: "var(--accent)", color: "#F2EDE4" }}>
+                      Copied!
+                    </span>
+                  )}
+                </button>
+              ) : (
+                <a key={link.label} href={link.href} aria-label={link.label} target="_blank" rel="noopener noreferrer"
+                  className="transition-all duration-200 hover:-translate-y-0.5"
+                  style={{ color: "var(--text-secondary)" }}
+                  onMouseEnter={e => (e.currentTarget.style.color = "var(--accent)")}
+                  onMouseLeave={e => (e.currentTarget.style.color = "var(--text-secondary)")}
+                >
+                  <link.icon size={18} />
+                </a>
+              )
             ))}
           </div>
         </div>
