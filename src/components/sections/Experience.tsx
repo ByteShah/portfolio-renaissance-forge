@@ -16,9 +16,23 @@ const Experience = () => {
 
   const experiences: JobExperience[] = [
     {
+      company: "Yularatech PTY LTD",
+      title: "AI Product Engineer",
+      date: "April 2026 - Present",
+      location: "Bangalore",
+      description: [
+        "Built an LLM-powered Gmail intelligence pipeline for classifying emails into structured life events, using Zod-validated outputs to ensure reliable downstream automation.",
+        "Designed a multi-tier AI scanning system with concurrency controls, scan-context prefetching to reduce N+1 query patterns, and automated cron cadences across 5-minute, 2-hour, and daily workflows.",
+        "Integrated Vercel AI Gateway as a unified routing layer across multiple AI providers, backed by a centralized model registry for provider/model abstraction.",
+        "Implemented secure OAuth credential storage using server-side AES-256-GCM token encryption, replacing an earlier browser-passphrase E2EE model to improve backend automation reliability.",
+        "Built a complete SaaS monetization system with free, plus, and pro tiers, feature gating, scan quotas, Google AdSense integration, and rewarded-ad credit top-up flows.",
+        "Architected the platform with Next.js App Router, React Server Components, Server Actions, Supabase RLS, service-role background jobs, and PKCE-based Google OAuth."
+      ]
+    },
+    {
       company: "SmartIT-LTD",
-      title: "Senior Odoo Developer",
-      date: "August 2025 - Present",
+      title: "Senior Software Developer",
+      date: "August 2025 - March 2026",
       location: "Ahmedabad, Gujarat",
       description: [
         "Developed multi-stage portal order approval workflow with manager validations and real-time notifications for Odoo eCommerce.",

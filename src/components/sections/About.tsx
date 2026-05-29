@@ -118,7 +118,7 @@ const About = () => {
             >
               <div className="bg-navy-lightest aspect-square flex items-center justify-center">
                 <motion.img 
-                  src="/profile.jpeg" 
+                  src="/profile.png"
                   alt="Jaimin Shah" 
                   className="w-full h-full object-cover"
                   whileHover={{ scale: 1.1 }}

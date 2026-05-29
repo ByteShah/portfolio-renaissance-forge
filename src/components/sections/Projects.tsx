@@ -27,6 +27,16 @@ const Projects = () => {
 
   const projects: Project[] = [
     {
+      title: "Textile Wholesale ERP & B2B Commerce System",
+      description: "Built and deployed a production-grade textile ERP system with 17 custom Odoo modules across B2B e-commerce, inventory, order-taking, pricing, agent commissions, analytics, and payments. Implemented customer approval gating, customer-type-based pricing, product visibility rules, watermarked catalog images, textile combo/set builders, CSV inventory imports, barcode-enabled tablet sales flows, inventory transfers, batch commission payouts, license enforcement, small-bill tracking, and editable storefront/homepage management.",
+      tags: ["Odoo", "Python", "B2B eCommerce", "ERP", "OWL", "PostgreSQL"],
+      image: "/textile.jpg",
+      github: "",
+      demo: "",
+      featured: true,
+      category: ["odoo", "web"],
+    },
+    {
       title: "Line of Credit (LoC) System",
       description: "Designed full Line of Credit platform with Plaid bank verification and Stripe payment workflows. Implemented credit disbursement, automated repayments, payout scheduling, multi-location LOC profiles, and complete statement generation engine with interest & fee calculations.",
       tags: ["Odoo", "Plaid", "Stripe", "Accounting", "API Integration"],
@@ -55,6 +65,42 @@ const Projects = () => {
       demo: "",
       featured: true,
       category: ["odoo"],
+    },
+    {
+      title: "Conversational AI Agent for Odoo ERP",
+      description: "AI assistant for Odoo databases using natural language queries. Built a natural language interpreter converting queries into ORM-safe operations, implemented role-based access validation aligned with Odoo security rules, enabled AI-driven report generation and workflow automation triggers, and added safeguards against prompt injection and unsafe database execution.",
+      tags: ["Odoo", "LLM", "Python", "ORM Security", "NLP", "AI"],
+      github: "",
+      demo: "",
+      featured: false,
+      category: ["odoo", "ai"],
+    },
+    {
+      title: "AI Meeting Intelligence & Knowledge Assistant",
+      description: "AI meeting assistant to convert discussions into structured and searchable knowledge. Developed recording pipeline with optimized single-channel audio compression, AI summarization for summaries/TODOs/insights, automated mind-map generation from conversation topics, conversational Q&A over transcripts using retrieval-based architecture, and a searchable meeting knowledge base.",
+      tags: ["LLM", "Audio Processing", "RAG", "Mind Mapping", "AI", "Vector Search"],
+      github: "",
+      demo: "",
+      featured: false,
+      category: ["ai", "web"],
+    },
+    {
+      title: "AI-Powered Real-Time Screen Assistant",
+      description: "Real-time AI assistant for screen understanding and contextual voice interaction. Integrated Gemini Vision APIs for live screen analysis, built voice pipeline with speech-to-text and text-to-speech orchestration, implemented session-based memory for task continuity, and designed low-latency streaming for real-time Siri/Copilot-style workflow guidance.",
+      tags: ["Gemini Vision", "Voice AI", "STT/TTS", "Streaming", "Python"],
+      github: "",
+      demo: "",
+      featured: false,
+      category: ["ai"],
+    },
+    {
+      title: "SaaSKit Automation Framework for OpenClaw",
+      description: "Automated SaaS deployment toolkit for OpenClaw infrastructure provisioning. Automated droplet provisioning via DigitalOcean APIs, built container lifecycle automation for image deployment and updates, integrated Telegram bot for remote deployment monitoring and environment control, and designed multi-instance onboarding workflows with environment isolation to reduce manual deployment effort.",
+      tags: ["DigitalOcean", "Docker", "Telegram Bot", "Infrastructure-as-Code", "DevOps"],
+      github: "",
+      demo: "",
+      featured: false,
+      category: ["web"],
     },
     {
       title: "Sales Forecasting Dashboard",
@@ -189,14 +235,14 @@ const Projects = () => {
                   index % 2 === 1 ? "lg:order-2" : "lg:order-1"
                 )}>
                   <div className="relative group aspect-video overflow-hidden rounded-xl">
-                    <div className="absolute inset-0 bg-violet/10 group-hover:bg-transparent transition-all duration-300"></div>
                     {project.image ? (
                       <>
-                        <img 
-                          src={project.image} 
-                          alt={project.title} 
+                        <img
+                          src={project.image}
+                          alt={project.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
+                        <div className="absolute inset-0 bg-gradient-to-br from-violet/75 via-blue-900/60 to-electric/65 mix-blend-multiply transition-opacity duration-300 group-hover:opacity-70" />
                         <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                           <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                             <h4 className="gradient-text font-bold text-xl mb-2">{project.title}</h4>

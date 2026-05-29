@@ -60,21 +60,26 @@ const Skills = () => {
     // Frameworks
     { name: "OWL", level: 5, category: "frameworks" },
     { name: "React.js", level: 4, category: "frameworks" },
+    { name: "Next.js", level: 4, category: "frameworks" },
+    { name: "React Native", level: 3, category: "frameworks" },
     { name: "Flask", level: 3, category: "frameworks" },
-    
+
     // Tools
     { name: "PostgreSQL", level: 4, category: "tools" },
     { name: "Docker", level: 4, category: "tools" },
     { name: "Git", level: 5, category: "tools" },
-    { name: "Power BI", level: 4, category: "tools" },
+    { name: "Supabase", level: 4, category: "tools" },
+    { name: "DigitalOcean", level: 4, category: "tools" },
     { name: "Postman", level: 4, category: "tools" },
-    
+
     // Integrations
     { name: "Twilio (VoIP/SMS)", level: 4, category: "integrations" },
     { name: "OHIP API", level: 5, category: "integrations" },
     { name: "OpenAI/Gemini LLMs", level: 4, category: "integrations" },
     { name: "Plaid API", level: 4, category: "integrations" },
     { name: "Stripe API", level: 5, category: "integrations" },
+    { name: "Claude MCP", level: 5, category: "integrations" },
+    { name: "Vercel AI Gateway", level: 4, category: "integrations" },
 
     // Data & ML
     { name: "TensorFlow", level: 4, category: "data_ml" },
