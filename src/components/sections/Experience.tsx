@@ -85,7 +85,7 @@ const experiences: JobExperience[] = [
   {
     company: "Level.ai",
     title: "AI Research Associate",
-    date: "Dec 2021 – Jan 2022",
+    date: "Mar 2021 – Jan 2022",
     location: "Remote",
     type: "Contract",
     metrics: ["95% EMG accuracy", "Published Elsevier", "80% less data entry"],
