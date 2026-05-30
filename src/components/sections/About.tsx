@@ -60,7 +60,7 @@ const About = () => {
       { opacity: 1, y: 0, stagger: 0.09, duration: 0.9, ease: "power3.out",
         scrollTrigger: { trigger: sectionRef.current, start: "top 72%" } }
     );
-    const counters = [{ ref: yearsRef, end: 5 }, { ref: modulesRef, end: 120 }, { ref: projectsRef, end: 30 }];
+    const counters = [{ ref: yearsRef, end: 8 }, { ref: modulesRef, end: 120 }, { ref: projectsRef, end: 30 }];
     counters.forEach(({ ref, end }) => {
       if (!ref.current) return;
       const obj = { val: 0 };
@@ -89,7 +89,7 @@ const About = () => {
             <div className="bento-cell p-8 lg:col-span-3" style={card}>
               <h3 className="text-xs font-semibold mb-5 tracking-widest uppercase gradient-text">Who I Am</h3>
               <p className="leading-relaxed mb-4 text-sm" style={{ color: "var(--text-secondary)" }}>
-                I'm Jaimin — an AI Product Engineer & Senior Odoo Developer with 5+ years building
+                I'm Jaimin — an AI Product Engineer & Senior Odoo Developer building
                 production-grade ERP systems, AI pipelines, and B2B platforms for global clients.
               </p>
               <p className="leading-relaxed mb-4 text-sm" style={{ color: "var(--text-secondary)" }}>
@@ -242,7 +242,7 @@ const About = () => {
 
             {/* Stats */}
             {[
-              { ref: yearsRef,    val: "0", suffix: "+", label: "Years Experience" },
+              { ref: yearsRef,    val: "0", suffix: "+", label: "AI Systems Built" },
               { ref: modulesRef,  val: "0", suffix: "+", label: "Odoo Modules Built" },
               { ref: projectsRef, val: "0", suffix: "+", label: "Projects Delivered" },
             ].map(({ ref, val, suffix, label }) => (

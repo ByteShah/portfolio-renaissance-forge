@@ -97,8 +97,8 @@ const Hero = () => {
 
             <motion.p className="max-w-lg leading-relaxed" style={{ color: "var(--text-secondary)" }}
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}>
-              5+ years building production-grade ERP systems, AI pipelines, and B2B platforms.
-              Delivered 30+ cross-functional projects automating workflows and building intelligent systems that scale.
+              Building production-grade ERP systems, AI pipelines, and B2B platforms.
+              Delivered 30+ cross-functional projects — automating workflows and shipping intelligent systems that scale.
             </motion.p>
 
             <motion.div className="flex flex-wrap gap-3"
