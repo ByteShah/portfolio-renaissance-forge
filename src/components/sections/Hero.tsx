@@ -1,38 +1,28 @@
-import { useState, useEffect, useRef } from "react";
-import { ArrowRight, Github, Linkedin, Mail, ChevronDown } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useGSAP } from "@gsap/react";
-import { gsap } from "@/lib/gsap";
-import { HeroScene } from "./HeroScene";
 
-const roles = ["AI Product Engineer", "Senior Odoo Developer", "Full-Stack Developer"];
+const roles = ["Techno-Functional Consultant", "Odoo Developer", "AI Product Owner"];
+
+// The three hats — shown as a compact strip under the intro.
+const hats = [
+  { label: "Consultant", text: "Requirements, gap analysis, process design, rollout" },
+  { label: "Developer", text: "Odoo 14–19, Python, OWL, React Native, APIs" },
+  { label: "Product Owner", text: "Roadmaps, specs and AI products people use daily" },
+];
+
+const scrollToId = (id: string) => {
+  const el = document.getElementById(id);
+  if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: "smooth" });
+};
 
 const Hero = () => {
   const [roleIndex, setRoleIndex] = useState(0);
-  const headlineRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     const interval = setInterval(() => setRoleIndex((p) => (p + 1) % roles.length), 2800);
     return () => clearInterval(interval);
   }, []);
-
-  useGSAP(() => {
-    const words = headlineRef.current?.querySelectorAll(".hero-word");
-    if (!words?.length) return;
-    gsap.fromTo(words,
-      { opacity: 0, y: 50 },
-      { opacity: 1, y: 0, stagger: 0.1, duration: 0.9, ease: "power3.out", delay: 0.3 }
-    );
-  }, []);
-
-  const handleMagneticMove = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
-    const btn = e.currentTarget;
-    const rect = btn.getBoundingClientRect();
-    btn.style.transform = `translate(${(e.clientX - rect.left - rect.width / 2) * 0.25}px, ${(e.clientY - rect.top - rect.height / 2) * 0.25}px)`;
-  };
-  const handleMagneticLeave = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
-    e.currentTarget.style.transform = "translate(0,0)";
-  };
 
   const socialLinks = [
     { icon: Github, href: "https://github.com/ByteShah", label: "GitHub" },
@@ -43,45 +33,28 @@ const Hero = () => {
   return (
     <section id="home" className="min-h-screen flex items-center section-padding relative overflow-hidden"
       style={{ background: "var(--bg)" }}>
-      <HeroScene />
+      {/* Soft static backdrop — replaces the WebGL scene */}
+      <div aria-hidden className="absolute inset-0 -z-0 pointer-events-none" style={{
+        background: "radial-gradient(ellipse 60% 50% at 80% 30%, rgba(74,94,58,0.10), transparent 70%), radial-gradient(ellipse 40% 40% at 10% 80%, rgba(122,144,99,0.08), transparent 70%)",
+      }} />
 
       <div className="container mx-auto relative z-10">
         <div className="flex flex-col md:flex-row md:items-center gap-12">
-          {/* Text */}
-          <div className="flex-1 space-y-6">
-            {/* Availability badge */}
-            <motion.div
+          <div className="flex-1 space-y-6 hero-in">
+            <div
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold"
-              style={{
-                background: "rgba(74,94,58,0.1)",
-                border: "1px solid rgba(74,94,58,0.25)",
-                color: "var(--accent)",
-              }}
-              initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+              style={{ background: "rgba(74,94,58,0.1)", border: "1px solid rgba(74,94,58,0.25)", color: "var(--accent)" }}
             >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
-                  style={{ background: "var(--accent)" }} />
-                <span className="relative inline-flex rounded-full h-2 w-2"
-                  style={{ background: "var(--accent)" }} />
-              </span>
-              Available for new projects
-            </motion.div>
+              <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: "var(--accent)" }} />
+              Independent consultant · Open to consulting &amp; product roles
+            </div>
 
-            <motion.p
-              className="text-sm tracking-widest uppercase font-medium"
-              style={{ color: "var(--accent)" }}
-              initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-            >
+            <p className="text-sm tracking-widest uppercase font-medium" style={{ color: "var(--accent)" }}>
               Hi, my name is
-            </motion.p>
+            </p>
 
-            <h1 ref={headlineRef} className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.95] tracking-tight">
-              {"Jaimin Shah.".split(" ").map((word, i) => (
-                <span key={i} className="hero-word inline-block mr-4 gradient-text">
-                  {word}
-                </span>
-              ))}
+            <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.95] tracking-tight gradient-text">
+              Jaimin Shah.
             </h1>
 
             <div className="text-xl md:text-2xl lg:text-3xl font-medium h-10 flex items-center"
@@ -95,102 +68,70 @@ const Hero = () => {
               </AnimatePresence>
             </div>
 
-            <motion.p className="max-w-lg leading-relaxed" style={{ color: "var(--text-secondary)" }}
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}>
-              Building production-grade ERP systems, AI pipelines, and B2B platforms.
-              Delivered 30+ cross-functional projects — automating workflows and shipping intelligent systems that scale.
-            </motion.p>
+            <p className="max-w-xl leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+              I sit between the business and the code. I map how a company actually works, configure Odoo
+              around it, write the modules it is missing, and own the apps and AI products built on top —
+              from the first workshop to go-live and the support after.
+            </p>
 
-            <motion.div className="flex flex-wrap gap-3"
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }}>
+            <div className="flex flex-wrap gap-3">
               <button
                 className="glow-button font-semibold px-7 py-3 rounded-xl flex items-center gap-2 group"
-                style={{ transition: "transform 0.2s ease" }}
-                onMouseMove={handleMagneticMove} onMouseLeave={handleMagneticLeave}
-                onClick={() => {
-                  const el = document.getElementById("contact");
-                  if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: "smooth" });
-                }}
+                onClick={() => scrollToId("products")}
               >
-                Contact Me
+                See what I've built
                 <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
               </button>
               <button
-                className="px-7 py-3 rounded-xl font-semibold border transition-all duration-200"
-                style={{ borderColor: "var(--border-color)", color: "var(--text-primary)", background: "transparent", transition: "transform 0.2s ease, all 0.2s" }}
-                onMouseMove={handleMagneticMove} onMouseLeave={handleMagneticLeave}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "var(--surface)"; }}
-                onMouseOut={e => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
-                onClick={() => {
-                  const el = document.getElementById("projects");
-                  if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: "smooth" });
-                }}
+                className="px-7 py-3 rounded-xl font-semibold border transition-colors duration-200 hover:bg-[var(--surface)]"
+                style={{ borderColor: "var(--border-color)", color: "var(--text-primary)" }}
+                onClick={() => scrollToId("contact")}
               >
-                View Work
+                Contact Me
               </button>
-            </motion.div>
+            </div>
 
-            <motion.div className="flex items-center gap-5 pt-1"
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
+            <div className="flex items-center gap-5 pt-1">
               {socialLinks.map((link) => (
-                <motion.a key={link.label} href={link.href} aria-label={link.label}
+                <a key={link.label} href={link.href} aria-label={link.label}
                   target="_blank" rel="noopener noreferrer"
-                  className="transition-colors duration-200"
-                  style={{ color: "var(--text-muted)", transition: "transform 0.2s ease, color 0.2s" }}
-                  onMouseMove={handleMagneticMove} onMouseLeave={handleMagneticLeave}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = "var(--accent)"; }}
-                  onMouseOut={e => { (e.currentTarget as HTMLElement).style.color = "var(--text-muted)"; }}
-                  whileHover={{ scale: 1.15 }} whileTap={{ scale: 0.95 }}
-                >
+                  className="transition-all duration-200 hover:-translate-y-0.5 text-[var(--text-muted)] hover:text-[var(--accent)]">
                   <link.icon size={19} />
-                </motion.a>
+                </a>
               ))}
-            </motion.div>
+            </div>
           </div>
 
           {/* Avatar */}
-          <motion.div className="flex-1 flex justify-center"
-            initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5, duration: 0.7 }}>
+          <div className="flex-1 flex justify-center hero-in" style={{ animationDelay: "150ms" }}>
             <div className="relative w-56 h-56 md:w-80 md:h-80">
-              {/* Subtle olive glow behind */}
               <div style={{
                 position: "absolute", inset: "-20px", borderRadius: "50%",
                 background: "radial-gradient(circle, rgba(74,94,58,0.12) 0%, transparent 70%)",
-                filter: "blur(20px)",
               }} />
-              {/* Gradient border */}
               <div className="w-full h-full rounded-full p-[2px] relative"
                 style={{ background: "linear-gradient(135deg, #4A5E3A, #7A9063, #2E3B25)" }}>
-                <motion.div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center"
-                  style={{ background: "var(--surface)" }}
-                  whileHover={{ scale: 1.03 }} transition={{ type: "spring", stiffness: 300 }}>
-                  <img src="/profile.png" alt="Jaimin Shah" className="w-full h-full object-cover"
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).style.display = "none";
-                      (e.currentTarget.nextElementSibling as HTMLElement)!.style.display = "flex";
-                    }} />
-                  <div className="gradient-text font-bold text-5xl md:text-7xl hidden items-center justify-center w-full h-full">JS</div>
-                </motion.div>
+                <div className="w-full h-full rounded-full overflow-hidden" style={{ background: "var(--surface)" }}>
+                  <img src="/profile.webp" alt="Jaimin Shah" width={320} height={320}
+                    fetchPriority="high" decoding="async" className="w-full h-full object-cover" />
+                </div>
               </div>
-              {/* Rotating ring */}
-              <motion.div className="absolute rounded-full border border-dashed"
-                style={{ inset: "-12px", borderColor: "rgba(74,94,58,0.25)" }}
-                animate={{ rotate: 360 }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }} />
-              <motion.div className="absolute rounded-full border border-dotted"
-                style={{ inset: "-24px", borderColor: "rgba(74,94,58,0.12)" }}
-                animate={{ rotate: -360 }} transition={{ duration: 45, repeat: Infinity, ease: "linear" }} />
+              <div className="absolute rounded-full border border-dashed animate-spin-slow"
+                style={{ inset: "-12px", borderColor: "rgba(74,94,58,0.25)", animationDuration: "40s" }} />
             </div>
-          </motion.div>
+          </div>
+        </div>
+
+        {/* Three hats */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-14 hero-in" style={{ animationDelay: "250ms" }}>
+          {hats.map((h) => (
+            <div key={h.label} className="glass-card px-5 py-4">
+              <p className="text-xs font-bold tracking-widest uppercase mb-1" style={{ color: "var(--accent)" }}>{h.label}</p>
+              <p className="text-sm" style={{ color: "var(--text-secondary)" }}>{h.text}</p>
+            </div>
+          ))}
         </div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 pointer-events-none"
-        animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }}>
-        <span className="text-xs tracking-widest uppercase" style={{ color: "var(--text-muted)" }}>Scroll</span>
-        <ChevronDown size={14} style={{ color: "var(--text-muted)" }} />
-      </motion.div>
     </section>
   );
 };

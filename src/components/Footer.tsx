@@ -16,13 +16,13 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
             <div className="gradient-text text-2xl font-bold mb-1">Jaimin Shah</div>
-            <p className="text-sm" style={{ color: "var(--text-secondary)" }}>AI Product Engineer & Senior Odoo Developer</p>
+            <p className="text-sm" style={{ color: "var(--text-secondary)" }}>Techno-Functional Odoo Consultant · Developer · AI Product Owner</p>
           </div>
           <div className="grid grid-cols-2 gap-x-16 gap-y-3 mb-8 md:mb-0">
             <div>
               <h3 className="font-semibold mb-3 text-sm" style={{ color: "var(--text-primary)" }}>Explore</h3>
               <ul className="space-y-2">
-                {["About", "Skills", "Projects"].map(l => (
+                {["About", "Products", "Approach"].map(l => (
                   <li key={l}><a href={`#${l.toLowerCase()}`} className="text-sm transition-colors hover:text-[var(--accent)]" style={{ color: "var(--text-secondary)" }}>{l}</a></li>
                 ))}
               </ul>
@@ -30,7 +30,7 @@ const Footer = () => {
             <div>
               <h3 className="font-semibold mb-3 text-sm" style={{ color: "var(--text-primary)" }}>Connect</h3>
               <ul className="space-y-2">
-                {["Experience", "Contact", "Book a Call"].map(l => (
+                {["Experience", "Skills", "Contact", "Book a Call"].map(l => (
                   <li key={l}>
                     <a
                       href={l === "Book a Call" ? "https://cal.com/jaimin-shah" : `#${l.toLowerCase()}`}

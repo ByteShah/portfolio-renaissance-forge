@@ -1,9 +1,7 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Send, Loader2, CheckCircle, Copy, Check } from "lucide-react";
 import { useCopyEmail } from "@/hooks/useCopyEmail";
 import { motion, AnimatePresence } from "framer-motion";
-import { useGSAP } from "@gsap/react";
-import { gsap } from "@/lib/gsap";
 import { useToast } from "@/hooks/use-toast";
 import { sendEmail } from "@/lib/emailjs";
 
@@ -52,7 +50,6 @@ const FloatingTextarea = ({ id, name, label, value, onChange, required }: {
 const Contact = () => {
   const { toast } = useToast();
   const { copied: emailCopied, copy: copyEmail } = useCopyEmail("s1.jaimin@gmail.com");
-  const sectionRef = useRef<HTMLElement>(null);
   const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -74,23 +71,16 @@ const Contact = () => {
 
   useEffect(() => { if (!success) return; const t = setTimeout(() => setSuccess(false), 5000); return () => clearTimeout(t); }, [success]);
 
-  useGSAP(() => {
-    gsap.from(".contact-form-container", {
-      opacity: 0, y: 50, duration: 1, ease: "power3.out",
-      scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
-    });
-  }, { scope: sectionRef });
-
   const cardStyle = { background: "var(--surface)", border: "1px solid var(--border-color)", borderRadius: "1rem" };
 
   return (
-    <section id="contact" ref={sectionRef} className="section-padding" style={{ background: "var(--surface)" }}>
+    <section id="contact" className="section-padding" style={{ background: "var(--bg)" }}>
       <div className="container mx-auto max-w-3xl">
         <div className="text-center space-y-4 mb-12">
           <p className="text-xs font-semibold tracking-widest uppercase gradient-text">What's Next?</p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold" style={{ color: "var(--text-primary)" }}>Get In Touch</h2>
           <p className="max-w-xl mx-auto leading-relaxed text-sm" style={{ color: "var(--text-secondary)" }}>
-            Open to new opportunities and collaborations. Whether you have a project idea, a question, or just want to connect — I'll get back to you.
+            Planning an Odoo rollout, stuck with a half-finished one, or need someone to own an AI product? Tell me what you're working on. I'm also open to techno-functional and product roles.
           </p>
         </div>
 

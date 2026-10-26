@@ -1,8 +1,7 @@
-import { useRef, useState } from "react";
-import { useGSAP } from "@gsap/react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { motion, AnimatePresence } from "framer-motion";
+import { Reveal } from "@/components/ui/Reveal";
 
 interface JobExperience {
   company: string;
@@ -16,6 +15,23 @@ interface JobExperience {
 }
 
 const experiences: JobExperience[] = [
+  {
+    company: "Independent",
+    title: "Techno-Functional Consultant, Developer & AI Product Owner",
+    date: "Present",
+    location: "Ahmedabad · clients in India, UK & North America",
+    type: "Consulting & Products",
+    metrics: ["48-module textile ERP", "40+ module client ERP", "Fabtoryx + LOOM products"],
+    tech: ["Odoo 19", "Python", "OWL", "React Native", "React", "Claude"],
+    description: [
+      "Own the CC Textile suite and the Fabtoryx app end to end. Together they run a multi-branch textile wholesaler's sales, stock, agents, books, B2B shop and WhatsApp.",
+      "Built and maintain LOOM Storefront, an open-source headless shop with an Odoo 19 connector for catalogue, checkout, payments and orders.",
+      "Delivered a 40+ module Odoo 19 ERP for a North American manufacturer: CRM attribution, quoting with US sales tax, production, helpdesk costing and RFID attendance.",
+      "Ran functional consulting for a UK multi-company rollout: implementation plan, chart of accounts, UK VAT, 3-step warehouse, inter-company flows and user guide.",
+      "Wrote the gap analyses, operating models, rollout sprints, test guides and user guides that come with each delivery.",
+      "Use AI agents across delivery (specs, code review, data setup), and let clients configure products like the Fabtoryx home screen through Claude.",
+    ],
+  },
   {
     company: "Yularatech PTY LTD",
     title: "AI Product Engineer",
@@ -77,7 +93,7 @@ const experiences: JobExperience[] = [
     description: [
       "Built Sales Forecasting Dashboard (Python + OWL) with time-series analysis, boosting inventory planning by 45%.",
       "Developed Stock Traceability Dashboard reducing discrepancies by 60% via real-time tracking.",
-      "Led 15+ Tally-to-Odoo transitions with custom API development for HRMS/logistics integrations.",
+      "Led 15+ Tally-to-Odoo transitions end to end: requirement workshops, data migration, and custom APIs for HRMS and logistics.",
       "Created collaborative drawing app (OWL + Odoo Knowledge) with attachment-based data storage.",
       "Mentored 8 junior developers and conducted 50+ technical interviews.",
     ],
@@ -100,233 +116,109 @@ const experiences: JobExperience[] = [
 ];
 
 const Experience = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const lineRef = useRef<HTMLDivElement>(null);
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [expanded, setExpanded] = useState<number | null>(null);
-
-  useGSAP(() => {
-    // Draw the vertical line on scroll
-    if (lineRef.current) {
-      gsap.fromTo(lineRef.current,
-        { scaleY: 0, transformOrigin: "top center" },
-        {
-          scaleY: 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top center",
-            end: "bottom center",
-            scrub: 1,
-          },
-        }
-      );
-    }
-
-    // Slide-in entrance per card
-    itemRefs.current.forEach((el, i) => {
-      if (!el) return;
-      const isLeft = i % 2 === 0;
-      gsap.from(el, {
-        opacity: 0,
-        x: isLeft ? -50 : 50,
-        duration: 0.7,
-        ease: "power3.out",
-        scrollTrigger: { trigger: el, start: "top 85%" },
-      });
-    });
-
-    // Open card when it enters viewport — never auto-close.
-    // Manual click still toggles individual cards.
-    itemRefs.current.forEach((el, i) => {
-      if (!el) return;
-      ScrollTrigger.create({
-        trigger: el,
-        start: "top 80%",
-        onEnter: () => setExpanded(i),
-        onEnterBack: () => setExpanded(i),
-      });
-    });
-  }, { scope: sectionRef });
+  // Phones show two bullets per role until expanded; md+ shows everything.
+  const [openIdx, setOpenIdx] = useState<Set<number>>(new Set());
+  const toggle = (i: number) => setOpenIdx((prev) => {
+    const next = new Set(prev);
+    if (next.has(i)) next.delete(i); else next.add(i);
+    return next;
+  });
 
   return (
-    <section id="experience" ref={sectionRef} className="section-padding">
-      <div className="container mx-auto">
-        <div className="numbered-heading mb-16">
-          <h2 className="text-2xl md:text-3xl font-bold" style={{ color: "var(--text-primary)" }}>
-            Experience
-          </h2>
-        </div>
+  <section id="experience" className="section-padding" style={{ background: "var(--bg)" }}>
+    <div className="container mx-auto">
+      <div className="numbered-heading mb-16">
+        <h2 className="text-2xl md:text-3xl font-bold" style={{ color: "var(--text-primary)" }}>
+          Experience
+        </h2>
+      </div>
 
-        <div className="relative max-w-5xl mx-auto">
-          {/* Vertical line */}
-          <div
-            ref={lineRef}
-            className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2"
-            style={{
-              background: "linear-gradient(180deg, #4A5E3A 0%, #7A9063 100%)",
-              transformOrigin: "top center",
-            }}
-          />
-          <div
-            className="md:hidden absolute left-4 top-0 bottom-0 w-px"
-            style={{ background: "linear-gradient(180deg, #4A5E3A, #7A9063)" }}
-          />
+      <div className="relative max-w-5xl mx-auto">
+        {/* Vertical line */}
+        <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2"
+          style={{ background: "linear-gradient(180deg, #4A5E3A 0%, #7A9063 100%)" }} />
+        <div className="md:hidden absolute left-[5px] top-0 bottom-0 w-px"
+          style={{ background: "linear-gradient(180deg, #4A5E3A, #7A9063)" }} />
 
-          <div className="space-y-14">
-            {experiences.map((exp, index) => {
-              const isLeft = index % 2 === 0;
-              const isOpen = expanded === index;
+        <div className="space-y-12">
+          {experiences.map((exp, index) => {
+            const isLeft = index % 2 === 0;
+            return (
+              <div key={exp.company}
+                className={cn("relative flex items-start gap-5 md:gap-0", isLeft ? "md:flex-row" : "md:flex-row-reverse")}>
+                {/* Mobile dot */}
+                <div className="md:hidden shrink-0 w-3 h-3 rounded-full border-2 mt-6 relative z-10"
+                  style={{ borderColor: "var(--accent)", background: index === 0 ? "var(--accent)" : "var(--bg)" }} />
 
-              return (
-                <div
-                  key={exp.company}
-                  ref={el => { itemRefs.current[index] = el; }}
-                  className={cn(
-                    "relative flex items-start gap-6 md:gap-0",
-                    isLeft ? "md:flex-row" : "md:flex-row-reverse"
-                  )}
-                >
-                  {/* Card */}
-                  <motion.div
-                    className={cn("w-full md:w-[46%]", isLeft ? "md:mr-auto" : "md:ml-auto")}
-                    animate={{ scale: isOpen ? 1.01 : 1 }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
-                    style={{
-                      background: isOpen ? "var(--bg)" : "var(--surface)",
-                      border: `1px solid ${isOpen ? "rgba(74,94,58,0.35)" : "var(--border-color)"}`,
-                      borderRadius: "1rem",
-                      borderLeft: `3px solid ${isOpen ? "var(--accent)" : "rgba(74,94,58,0.3)"}`,
-                      transition: "background 0.3s, border-color 0.3s",
-                    }}
-                  >
-                    {/* Header — clickable to toggle manually too */}
-                    <button
-                      className="w-full text-left p-5 flex items-start justify-between gap-3"
-                      onClick={() => setExpanded(isOpen ? null : index)}
-                    >
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 flex-wrap mb-0.5">
-                          <span className="gradient-text text-xs font-bold">{exp.company}</span>
-                          <span
-                            className="text-xs px-2 py-0.5 rounded-full"
-                            style={{
-                              background: "var(--surface)",
-                              color: "var(--text-muted)",
-                              border: "1px solid var(--border-color)",
-                            }}
-                          >
-                            {exp.type}
-                          </span>
-                        </div>
-                        <h3 className="font-bold text-base leading-tight" style={{ color: "var(--text-primary)" }}>
-                          {exp.title}
-                        </h3>
-                        <p className="text-xs mt-0.5" style={{ color: "var(--text-muted)" }}>
-                          {exp.date} · {exp.location}
-                        </p>
+                <Reveal className={cn("w-full md:w-[46%]", isLeft ? "md:mr-auto" : "md:ml-auto")}>
+                  <div style={{
+                    background: "var(--surface)",
+                    border: "1px solid var(--border-color)",
+                    borderLeft: "3px solid var(--accent)",
+                    borderRadius: "1rem",
+                  }}>
+                    <div className="p-5 pb-3">
+                      <div className="flex items-center gap-2 flex-wrap mb-0.5">
+                        <span className="gradient-text text-xs font-bold">{exp.company}</span>
+                        <span className="text-xs px-2 py-0.5 rounded-full"
+                          style={{ background: "var(--bg)", color: "var(--text-muted)", border: "1px solid var(--border-color)" }}>
+                          {exp.type}
+                        </span>
                       </div>
-                      <motion.span
-                        className="shrink-0 text-lg leading-none font-light"
-                        style={{ color: "var(--accent)" }}
-                        animate={{ rotate: isOpen ? 45 : 0 }}
-                        transition={{ duration: 0.25 }}
-                      >
-                        +
-                      </motion.span>
-                    </button>
+                      <h3 className="font-bold text-base leading-tight" style={{ color: "var(--text-primary)" }}>{exp.title}</h3>
+                      <p className="text-xs mt-0.5" style={{ color: "var(--text-muted)" }}>{exp.date} · {exp.location}</p>
+                    </div>
 
-                    {/* Metrics */}
                     {exp.metrics && (
                       <div className="flex flex-wrap gap-2 px-5 pb-3">
-                        {exp.metrics.map(m => (
-                          <span
-                            key={m}
-                            className="text-xs font-semibold px-2.5 py-1 rounded-full"
-                            style={{ background: "rgba(74,94,58,0.1)", color: "var(--accent)" }}
-                          >
-                            ↑ {m}
+                        {exp.metrics.map((m) => (
+                          <span key={m} className="text-xs font-semibold px-2.5 py-1 rounded-full"
+                            style={{ background: "rgba(74,94,58,0.1)", color: "var(--accent)" }}>
+                            {m}
                           </span>
                         ))}
                       </div>
                     )}
 
-                    {/* Tech tags */}
-                    <div className="flex flex-wrap gap-1.5 px-5 pb-4">
-                      {exp.tech.map(t => (
-                        <span
-                          key={t}
-                          className="text-xs px-2.5 py-0.5 rounded-full"
-                          style={{
-                            background: "var(--surface)",
-                            color: "var(--text-secondary)",
-                            border: "1px solid var(--border-color)",
-                          }}
-                        >
+                    <ul className="px-5 py-4 space-y-2 border-t" style={{ borderColor: "var(--border-color)" }}>
+                      {exp.description.map((point, i) => (
+                        <li key={point} className={cn("items-start gap-2 text-sm", i < 2 || openIdx.has(index) ? "flex" : "hidden md:flex")}
+                          style={{ color: "var(--text-secondary)" }}>
+                          <span className="shrink-0 font-bold" style={{ color: "var(--accent)" }}>›</span>
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                    {exp.description.length > 2 && (
+                      <button onClick={() => toggle(index)} aria-expanded={openIdx.has(index)}
+                        className="md:hidden mx-5 -mt-2 mb-4 inline-flex items-center gap-1 text-sm font-semibold"
+                        style={{ color: "var(--accent)" }}>
+                        {openIdx.has(index) ? "Show less" : `Show ${exp.description.length - 2} more`}
+                        <ChevronDown size={14} className={openIdx.has(index) ? "rotate-180 transition-transform" : "transition-transform"} />
+                      </button>
+                    )}
+
+                    <div className="flex flex-wrap gap-1.5 px-5 pb-5">
+                      {exp.tech.map((t) => (
+                        <span key={t} className="text-xs px-2.5 py-0.5 rounded-full"
+                          style={{ background: "var(--bg)", color: "var(--text-secondary)", border: "1px solid var(--border-color)" }}>
                           {t}
                         </span>
                       ))}
                     </div>
+                  </div>
+                </Reveal>
 
-                    {/* Expandable bullets — auto-driven by scroll OR manual click */}
-                    <AnimatePresence initial={false}>
-                      {isOpen && (
-                        <motion.div
-                          key="bullets"
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.35, ease: "easeInOut" }}
-                          style={{ overflow: "hidden" }}
-                        >
-                          <ul
-                            className="px-5 pb-5 space-y-2 border-t"
-                            style={{ borderColor: "var(--border-color)" }}
-                          >
-                            <div className="pt-3" />
-                            {exp.description.map((point, i) => (
-                              <li
-                                key={i}
-                                className="flex items-start gap-2 text-sm"
-                                style={{ color: "var(--text-secondary)" }}
-                              >
-                                <span className="shrink-0 mt-0.5 font-bold" style={{ color: "var(--accent)" }}>
-                                  ›
-                                </span>
-                                {point}
-                              </li>
-                            ))}
-                          </ul>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-
-                  {/* Center dot — glows when active */}
-                  <motion.div
-                    className="hidden md:flex absolute left-1/2 top-6 -translate-x-1/2 z-10 w-3 h-3 rounded-full border-2"
-                    animate={{
-                      scale: isOpen ? 1.5 : 1,
-                      boxShadow: isOpen ? "0 0 12px rgba(74,94,58,0.5)" : "0 0 0px rgba(74,94,58,0)",
-                    }}
-                    transition={{ duration: 0.3 }}
-                    style={{ borderColor: "var(--accent)", background: isOpen ? "var(--accent)" : "var(--bg)" }}
-                  />
-                  {/* Mobile dot */}
-                  <div
-                    className="md:hidden shrink-0 w-3 h-3 rounded-full border-2 mt-6"
-                    style={{
-                      borderColor: "var(--accent)",
-                      background: isOpen ? "var(--accent)" : "var(--bg)",
-                    }}
-                  />
-                </div>
-              );
-            })}
-          </div>
+                {/* Center dot */}
+                <div className="hidden md:block absolute left-1/2 top-6 -translate-x-1/2 z-10 w-3 h-3 rounded-full border-2"
+                  style={{ borderColor: "var(--accent)", background: index === 0 ? "var(--accent)" : "var(--bg)" }} />
+              </div>
+            );
+          })}
         </div>
       </div>
-    </section>
+    </div>
+  </section>
   );
 };
 

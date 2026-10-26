@@ -5,9 +5,10 @@ import { motion } from "framer-motion";
 
 const navItems = [
   { name: "About",      href: "#about" },
-  { name: "Skills",     href: "#skills" },
-  { name: "Projects",   href: "#projects" },
+  { name: "Products",   href: "#products" },
+  { name: "Approach",   href: "#approach" },
   { name: "Experience", href: "#experience" },
+  { name: "Skills",     href: "#skills" },
   { name: "Contact",    href: "#contact" },
 ];
 
@@ -23,7 +24,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -59,7 +60,7 @@ const Navbar = () => {
       className={cn("fixed top-0 w-full z-50 transition-all duration-300")}
       style={{
         background: scrolled ? "rgba(242,237,228,0.92)" : "transparent",
-        backdropFilter: scrolled ? "blur(16px)" : "none",
+        backdropFilter: scrolled ? "blur(8px)" : "none",
         boxShadow: scrolled ? "0 1px 0 rgba(28,28,26,0.07)" : "none",
       }}
     >
@@ -118,8 +119,8 @@ const Navbar = () => {
         <div
           id="mobile-menu"
           className={cn(
-            "fixed top-0 right-0 bottom-0 w-3/4 p-8 shadow-2xl transform transition-transform duration-300 ease-in-out z-50 border-l",
-            isMenuOpen ? "translate-x-0" : "translate-x-full"
+            "md:hidden fixed top-0 right-0 bottom-0 w-3/4 p-8 transform transition-transform duration-300 ease-in-out z-50 border-l",
+            isMenuOpen ? "translate-x-0 shadow-2xl" : "translate-x-full invisible"
           )}
           style={{ background: "var(--bg)", borderColor: "var(--border-color)", height: "100vh" }}
         >

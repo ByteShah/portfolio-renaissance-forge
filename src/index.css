@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -64,10 +62,8 @@
     color: var(--text-primary);
     font-family: 'Space Grotesk', Inter, sans-serif;
     overflow-x: hidden;
-    cursor: none;
+    -webkit-font-smoothing: antialiased;
   }
-
-  @media (pointer: coarse) { body { cursor: auto; } }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Space Grotesk', sans-serif;
@@ -76,12 +72,14 @@
   }
 
   .section-padding {
-    @apply py-20 px-6 md:py-24 md:px-12 lg:py-32 lg:px-16 xl:px-24;
+    @apply py-16 px-0 md:py-24 md:px-8 lg:py-32 lg:px-16 xl:px-24;
   }
 
   .numbered-heading {
     @apply flex items-center w-full relative;
   }
+
+  .numbered-heading > h2 { flex-shrink: 0; }
 
   .numbered-heading::after {
     content: "";
@@ -212,20 +210,6 @@
   color: #1C1C1A;
 }
 
-/* Grain keyframes */
-@keyframes grain {
-  0%, 100% { transform: translate(0,0); }
-  10%  { transform: translate(-5%,-10%); }
-  20%  { transform: translate(-15%,5%); }
-  30%  { transform: translate(7%,-25%); }
-  40%  { transform: translate(-5%,25%); }
-  50%  { transform: translate(-15%,10%); }
-  60%  { transform: translate(15%,0%); }
-  70%  { transform: translate(0%,15%); }
-  80%  { transform: translate(3%,35%); }
-  90%  { transform: translate(-10%,10%); }
-}
-
 /* Marquee */
 @keyframes marquee {
   0%   { transform: translateX(0); }
@@ -249,3 +233,24 @@
   0%   { transform: translateX(-50%); }
   100% { transform: translateX(0); }
 }
+
+/* Scroll reveal (see components/ui/Reveal.tsx) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+}
+
+/* Hero entrance — plain CSS, no JS animation library */
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
+}
+.hero-in { animation: hero-in 0.7s ease-out both; }
